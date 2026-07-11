@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Onul Creative — Daeun Choi</title>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Space+Grotesk:wght@300;400;500&family=Ballet:opsz@16..72&family=EB+Garamond:ital@0;1&family=Monsieur+La+Doulaise&family=Hahmlet&display=block" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink: #111110;
+      --ink-2: #888884;
+      --paper: #ffffff;
+      --serif: 'IM Fell English', 'Times New Roman', Georgia, serif;
+      --sans: 'Space Grotesk', system-ui, sans-serif;
+    }
+    body {
+      margin: 0; padding: 0;
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    .page { display: none !important; min-height: 100vh; }
+    .page.active { display: block !important; }
+
+    /* Portfolio floating logo */
+    #portfolio-logo {
+      position: fixed;
+      top: -2.2rem;
+      left: 0.2rem;
+      z-index: 300;
+      height: 11.5rem;
+      width: auto;
+      cursor: pointer;
+      opacity: 0.92;
+      filter: none;
+    }
+    #portfolio-logo.white { filter: brightness(0) invert(1); }
+
+    /* ── SPLASH ── */
+    #page-splash {
+      background: #f2efe8;
+      overflow: hidden;
+      height: 100vh;
+      max-height: 100vh;
+      padding: 0;
+      margin: 0;
+    }
+    .pf-splash {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .pf-splash-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pf-nav-text {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #fff;
+      text-align: center;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .pf-nav-text:hover { opacity: 0.6; }
+
+    /* ── WORK PAGE ── */
+    #page-work {
+      background: url('portfolio_wokpage_background.png') center center / cover no-repeat fixed;
+      overflow-y: auto;
+      font-family: var(--sans);
+      color: #d8ccb8;
+    }
+    .pw-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 2rem 5vw;
+    }
+    .pw-nav-links { display: flex; gap: 2.8rem; }
+    .pw-nav-item {
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #a89e8e;
+      cursor: pointer;
+    }
+    .pw-nav-item.active { color: #e0d4bc; border-bottom: 1px solid #e0d4bc; padding-bottom: 2px; }
+    .pw-hero {
+      display: grid;
+      grid-template-columns: 48% 52%;
+      align-items: center;
+      padding: 3rem 5vw 5rem;
+      min-height: 50vh;
+    }
+    .pw-hero-title {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(5rem, 10vw, 9rem);
+      font-weight: 400;
+      color: #e8ddc8;
+      line-height: 1;
+      margin-bottom: 1.6rem;
+    }
+    .pw-hero-sub {
+      font-size: 0.82rem;
+      line-height: 1.75;
+      color: #a09080;
+      max-width: 290px;
+      margin-bottom: 3rem;
+    }
+    .pw-scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #7a6e5e;
+    }
+    .pw-scroll-dot {
+      width: 1.6rem;
+      height: 1.6rem;
+      border-radius: 50%;
+      border: 1px solid #7a6e5e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .pw-scroll-dot::after {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #7a6e5e;
+    }
+    .pw-hero-circle {
+      width: 62%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+    .pw-hero-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pw-list { padding: 0 5vw 3rem; display: flex; flex-direction: column; gap: 1.2rem; }
+    .pw-item {
+      display: grid;
+      grid-template-columns: 35% 65%;
+      border: 1px solid rgba(200,175,140,0.18);
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .pw-item:hover { border-color: rgba(200,175,140,0.45); }
+    .pw-item-meta { padding: 3rem 2.5rem; display: flex; flex-direction: column; }
+    .pw-item-index { font-size: 0.66rem; color: #6a5e50; margin-bottom: 1.2rem; }
+    .pw-item-title {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      font-weight: 400;
+      text-transform: uppercase;
+      color: #e8ddc8;
+      line-height: 1.05;
+      margin-bottom: 0.3rem;
+    }
+    .pw-item-subtitle {
+      font-size: 0.54rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #7a6e5e;
+      margin-bottom: 1.2rem;
+    }
+    .pw-item-rule { width: 2rem; border: none; border-top: 1px solid rgba(200,175,140,0.25); margin: 0 0 1.4rem; }
+    .pw-item-desc { font-size: 0.78rem; line-height: 1.72; color: #9a8e7e; max-width: 220px; margin-bottom: 2.5rem; }
+    .pw-item-cta {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.58rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #c0b09a;
+      border-bottom: 1px solid rgba(200,175,140,0.35);
+      padding-bottom: 3px;
+      width: fit-content;
+      margin-top: auto;
+    }
+    .pw-item-img { overflow: hidden; }
+    .pw-item-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .pw-footer {
+      display: flex;
+      justify-content: space-between;
+      padding: 1.8rem 5vw;
+      border-top: 1px solid rgba(200,175,140,0.12);
+      font-size: 0.54rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #5a5040;
+      margin-top: 2rem;
+    }
+
+    /* ── PORTFOLIO DETAIL ── */
+    #page-detail {
+      background: #f2efe8;
+      overflow-y: auto;
+      min-height: 100vh;
+    }
+    .pf-detail-inner { padding: 8rem 7vw 6rem; max-width: 1100px; margin: 0 auto; }
+    .pf-detail-header { margin-bottom: 4rem; }
+    .pf-detail-eyebrow {
+      font-size: 0.56rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 1rem;
+    }
+    .pf-detail-title {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 400;
+      text-transform: uppercase;
+      color: #1a1a1a;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    .pf-detail-tagline { font-size: 0.9rem; line-height: 1.75; color: #555; max-width: 480px; }
+    .pf-detail-image { display: block; width: 100%; margin-bottom: 0.5rem; }
+    .pf-detail-caption {
+      font-size: 0.72rem;
+      color: #888;
+      letter-spacing: 0.04em;
+      margin-bottom: 4rem;
+    }
+    .pf-detail-rule { border: none; border-top: 1px solid #ddd; margin: 3rem 0; }
+    .pf-detail-footnote { font-size: 0.88rem; line-height: 1.85; color: #444; max-width: 640px; }
+
+    /* ── ABOUT (portfolio-branded) ── */
+    #page-about {
+      background: #0e0d0c;
+      min-height: 100vh;
+      color: rgba(255,255,255,0.75);
+    }
+    #page-about.active { display: flex !important; flex-direction: column; }
+    .about-diptych { display: grid; grid-template-columns: 1fr 1fr; }
+    .about-diptych-img { width: 100%; height: auto; display: block; filter: brightness(0.9); }
+    .about-col { display: flex; flex-direction: column; }
+    .about-name-col {
+      font-family: 'Ballet', cursive;
+      font-weight: 400;
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      color: rgba(255,255,255,0.9);
+      line-height: 1.1;
+      padding: 2.5rem 2rem;
+      white-space: nowrap;
+      text-align: center;
+    }
+    .about-bio-col {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1rem, 1.3vw, 1.2rem);
+      line-height: 2;
+      color: rgba(255,255,255,0.75);
+      padding: 2.5rem 2rem;
+    }
+    .about-bio-col p { margin-bottom: 1.2rem; }
+
+    /* ── CONTACT (portfolio-branded) ── */
+    #page-contact {
+      background: #0a0a0a;
+      position: relative;
+      overflow: hidden;
+      min-height: 100vh;
+    }
+    #page-contact::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('lilies-rotated.png') center center / cover no-repeat;
+      opacity: 0.55;
+      z-index: 0;
+    }
+    .contact-inner { position: relative; z-index: 1; padding: 10rem 2rem 6rem; max-width: 680px; }
+    #page-contact h2 {
+      font-family: 'Ballet', cursive;
+      font-weight: 400;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 3rem;
+      color: #fff;
+    }
+    .contact-form { display: flex; flex-direction: column; }
+    .cf-row { border-bottom: 1px solid rgba(255,255,255,0.3); padding: 1.1rem 0; }
+    .cf-row:first-child { border-top: 1px solid rgba(255,255,255,0.3); }
+    .cf-row input, .cf-row textarea {
+      width: 100%; border: none; background: transparent;
+      font-family: var(--sans); font-size: 14px; color: #fff;
+      outline: none; resize: none; line-height: 1.6;
+    }
+    .cf-row textarea { min-height: 120px; }
+    .cf-row input::placeholder, .cf-row textarea::placeholder { color: rgba(255,255,255,0.45); }
+    .cf-submit {
+      margin-top: 2rem; align-self: flex-start;
+      font-family: var(--sans); font-size: 12px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #fff; background: none; border: 1px solid rgba(255,255,255,0.6);
+      padding: 0.8rem 2rem; cursor: pointer; transition: background 0.2s, color 0.2s;
+    }
+    .cf-submit:hover { background: #fff; color: #111; }
+    .contact-email {
+      font-family: var(--serif); font-size: 1.1rem;
+      margin-bottom: 2.5rem; color: rgba(255,255,255,0.8);
+    }
+    .contact-email a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.4); }
+
+    /* ── PROCESS (portfolio-branded) ── */
+    #page-process {
+      background: #111;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+    .process-hscroll-track { height: 100vh; overflow: hidden; }
+    .process-hscroll-inner {
+      display: flex;
+      height: 100vh;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-behavior: smooth;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .process-hscroll-inner::-webkit-scrollbar { display: none; }
+    .project-card {
+      position: relative;
+      flex: 0 0 calc(50vw - 1rem);
+      height: 100vh;
+      overflow: hidden;
+      cursor: pointer;
+      border-radius: 12px;
+      margin: 1rem 0.5rem;
+    }
+    .project-card:first-child { margin-left: 1rem; }
+    .project-card:last-child  { margin-right: 1rem; }
+    .project-card-img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.6s ease, filter 0.4s ease;
+    }
+    .project-card:hover .project-card-img { transform: scale(1.03); filter: blur(6px) brightness(0.6); }
+    .project-card-bg {
+      width: 100%; height: 100%;
+      background: #1e1e1e;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .project-card-bg-text { font-style: italic; color: #444; font-size: 1rem; }
+    .project-card-label {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Ballet', cursive; font-weight: 400;
+      font-size: clamp(1.6rem, 3vw, 2.8rem);
+      color: #fff; line-height: 1.1; text-align: center;
+      padding: 2rem;
+      opacity: 0; transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .project-card:hover .project-card-label { opacity: 1; }
+
+    /* Lightbox */
+    .lightbox {
+      display: none;
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,0.92);
+      align-items: center; justify-content: center;
+      cursor: zoom-out;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; display: block; }
+  </style>
+</head>
+<body>
+
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
+  </div>
+
+  <!-- Floating logo — always visible, click goes to splash -->
+  <img id="portfolio-logo" src="portfolio_Logo_Transparent.png" alt="Onul Creative" onclick="showPage('splash')" />
+
+  <!-- SPLASH -->
+  <div id="page-splash" class="page active">
+    <div class="pf-splash">
+      <img class="pf-splash-img" src="Portfolioload page.png" alt="" />
+      <button class="pf-nav-text" style="left:54%;top:50%;" onclick="showPage('work')">Work</button>
+      <button class="pf-nav-text" style="left:33%;top:74%;color:#1a1a1a;font-size:1.4rem;" onclick="showPage('about')">About</button>
+      <button class="pf-nav-text" style="left:77%;top:80%;color:#1a1a1a;font-size:1.4rem;" onclick="showPage('contact')">Contact</button>
+      <button class="pf-nav-text" style="left:74.8%;top:29%;" onclick="showPage('process')">Process</button>
+    </div>
+  </div>
+
+  <!-- WORK -->
+  <div id="page-work" class="page">
+    <nav class="pw-nav">
+      <div></div>
+      <div class="pw-nav-links">
+        <span class="pw-nav-item active">Work</span>
+        <span class="pw-nav-item" onclick="showPage('process')">Process</span>
+        <span class="pw-nav-item" onclick="showPage('contact')">Contact</span>
+        <span class="pw-nav-item" onclick="showPage('about')">About</span>
+      </div>
+    </nav>
+    <div class="pw-hero">
+      <div class="pw-hero-left">
+        <h1 class="pw-hero-title">Work</h1>
+        <p class="pw-hero-sub">Visual storytelling, concept development, and AI-assisted production for thoughtful brands.</p>
+        <div class="pw-scroll-hint"><div class="pw-scroll-dot"></div><span>Scroll to explore</span></div>
+      </div>
+      <div class="pw-hero-right">
+        <div class="pw-hero-circle">
+          <img src="NuvelaAd1.png" alt="" />
+        </div>
+      </div>
+    </div>
+    <div class="pw-list" id="pw-list"></div>
+    <div class="pw-footer">
+      <span>© Onul Creative</span>
+      <span>Based in Bellevue, WA</span>
+    </div>
+  </div>
+
+  <!-- DETAIL -->
+  <div id="page-detail" class="page">
+    <div id="pf-detail-inner" class="pf-detail-inner"></div>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="page-about" class="page">
+    <div class="about-diptych">
+      <div class="about-col">
+        <img class="about-diptych-img" src="about-portrait.JPG" alt="Daeun Choi" />
+        <div class="about-bio-col">
+          <p>Hello! I'm Daeun, I'm an economics and art history student with a fine arts background, and a self-taught AI creative based in Los Angeles.</p>
+          <p>I specialize in crafting visual ad content, from concept to finished product, and my mix of training means I think about aesthetics and consumer behavior at the same time.</p>
+          <p>I care a lot about making things that are both beautiful and effective. If that sounds like what you need, let's talk :)</p>
+        </div>
+      </div>
+      <div class="about-col">
+        <img class="about-diptych-img" src="about-flower.png" alt="flower arrangement" />
+        <div class="about-name-col">Daeun Choi</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div id="page-contact" class="page">
+    <div class="contact-inner">
+      <h2>Contact</h2>
+      <p class="contact-email">
+        <a href="mailto:daeundaeun223@gmail.com">daeundaeun223@gmail.com</a>
+      </p>
+      <form class="contact-form" onsubmit="submitContact(event)">
+        <div class="cf-row"><input type="text" placeholder="Name" required /></div>
+        <div class="cf-row"><input type="email" placeholder="Email" required /></div>
+        <div class="cf-row"><input type="text" placeholder="Subject" /></div>
+        <div class="cf-row"><textarea placeholder="Message"></textarea></div>
+        <button type="submit" class="cf-submit">Send</button>
+      </form>
+      <p id="cf-confirm" style="display:none; margin-top:1.5rem; font-size:13px; color:#888; font-family:var(--sans);">
+        Thanks — I'll be in touch.
+      </p>
+    </div>
+  </div>
+
+  <!-- PROCESS -->
+  <div id="page-process" class="page">
+    <div class="process-hscroll-track">
+      <div class="process-hscroll-inner" id="process-grid"></div>
+    </div>
+  </div>
+
+  <script>
+    const allPages = ['splash', 'work', 'detail', 'about', 'contact', 'process'];
+
+    function showPage(name) {
+      allPages.forEach(id => {
+        const el = document.getElementById('page-' + id);
+        if (el) el.classList.toggle('active', id === name);
+      });
+      const logo = document.getElementById('portfolio-logo');
+      logo.classList.toggle('white', name === 'work' || name === 'process');
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+
+    // ── PORTFOLIO ITEMS ──
+    const portfolioItems = [
+      {
+        id: 'nuvela',
+        title: 'Nuvela',
+        subtitle: 'Advertisement',
+        category: 'Advertisement',
+        year: '2025',
+        tagline: 'A print campaign positioning everyday skincare as serious, structural work.',
+        projectType: 'Concept Campaign',
+        deliverables: 'Print Advertising · Art Direction',
+        images: [
+          { src: 'NuvelaAd1.png', caption: 'Nuvela Balancing Essence — paving the way to better skin' },
+          { src: 'NuvelaAd2.png', caption: 'Nuvela Brightening Serum — a solid foundation for radiant skin' },
+        ],
+        footnote: 'The campaign borrows the visual language of construction — road rollers, cement mixers, heavy machinery — and places Nuvela products at the centre of each machine. The conceit is simple: good skin is built, not found. Each execution carries its own tagline, but they share the same logic: that the ingredients inside a bottle are as serious as any industrial process.',
+      },
+    ];
+
+    function buildWorkList() {
+      const list = document.getElementById('pw-list');
+      if (!list) return;
+      list.innerHTML = portfolioItems.map((item, i) => `
+        <div class="pw-item" onclick="showDetail('${item.id}')">
+          <div class="pw-item-meta">
+            <div class="pw-item-index">0${i + 1}</div>
+            <div class="pw-item-title">${item.title}</div>
+            <div class="pw-item-subtitle">${item.subtitle}</div>
+            <hr class="pw-item-rule" />
+            <div class="pw-item-desc">${item.tagline}</div>
+            <div class="pw-item-cta">View Project &nbsp;&#8594;</div>
+          </div>
+          <div class="pw-item-img">
+            <img src="${item.images[0].src}" alt="${item.title}" />
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function showDetail(id) {
+      const item = portfolioItems.find(x => x.id === id);
+      if (!item) return;
+      document.getElementById('pf-detail-inner').innerHTML = `
+        <div class="pf-detail-header">
+          <div class="pf-detail-eyebrow">${item.category} &mdash; ${item.year}</div>
+          <div class="pf-detail-title">${item.title}</div>
+          <div class="pf-detail-tagline">${item.tagline}</div>
+        </div>
+        ${item.images.map(img => `
+          <img class="pf-detail-image" src="${img.src}" alt="${item.title}" onclick="openLightbox(this.src)" style="cursor:zoom-in;" />
+          <div class="pf-detail-caption">${img.caption}</div>
+        `).join('')}
+        <div>
+          <hr class="pf-detail-rule" />
+          <p class="pf-detail-footnote">${item.footnote}</p>
+        </div>`;
+      showPage('detail');
+    }
+
+    // ── PROCESS (reuses projects data style) ──
+    const processProjects = [
+      { id: 'p-1', title: 'Muge', thumb: 'project1-cover.jpg' },
+      { id: 'p-2', title: 'Project Two', thumb: '' },
+    ];
+
+    function renderProcess() {
+      document.getElementById('process-grid').innerHTML = processProjects.map(p => `
+        <div class="project-card">
+          ${p.thumb
+            ? `<img class="project-card-img" src="${p.thumb}" alt="${p.title}" loading="lazy" />`
+            : `<div class="project-card-bg"><span class="project-card-bg-text">Add image</span></div>`}
+          <div class="project-card-label">${p.title}</div>
+        </div>
+      `).join('');
+
+      const inner = document.getElementById('process-grid');
+      inner.addEventListener('wheel', e => {
+        e.preventDefault();
+        inner.scrollLeft += (e.deltaY + e.deltaX) * 25;
+      }, { passive: false });
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    function submitContact(e) {
+      e.preventDefault();
+      e.target.style.display = 'none';
+      document.getElementById('cf-confirm').style.display = 'block';
+    }
+
+    buildWorkList();
+    renderProcess();
+  </script>
+</body>
+</html>
