@@ -1350,6 +1350,7 @@
       will-change: transform;
       transition: transform 0.05s linear;
       gap: 1rem;
+      padding-right: 3rem;
     }
     .pm-panel {
       flex-shrink: 0;
@@ -1479,6 +1480,17 @@
       color: rgba(255,255,255,0.35);
       min-width: 6rem;
     }
+
+    .tumble-card-cover {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .tumble-card:hover .tumble-card-cover { opacity: 0; }
 
     /* ─── Gentle Monster Case Study ─── */
     #page-gm.active { display: block !important; }
@@ -1710,9 +1722,10 @@
           </div>
 
           <!-- 02 Tumble Ad -->
-          <div class="pm-panel" onclick="showPage('tumble')">
-            <div class="pm-panel-img">
-              <video src="Tumble Ad.mp4" muted loop playsinline autoplay style="width:100%;height:100%;object-fit:cover;"></video>
+          <div class="pm-panel tumble-card" onclick="showPage('tumble')">
+            <div class="pm-panel-img" style="position:relative;">
+              <video id="tumble-card-vid" src="Tumble Ad.mp4" muted playsinline preload="auto" loop style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+              <img src="tumble card.png" alt="Tumble Ad" class="tumble-card-cover" />
             </div>
           </div>
 
@@ -2063,6 +2076,15 @@
     window.addEventListener('scroll', gmHscroll, { passive: true });
 
 
+
+    // Tumble card: play video on hover, pause on leave
+    (function () {
+      const card = document.querySelector('.tumble-card');
+      const v = document.getElementById('tumble-card-vid');
+      if (!card || !v) return;
+      card.addEventListener('mouseenter', () => v.play());
+      card.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+    })();
 
     function initNuvelaNav() {
       const items = document.querySelectorAll('#nv-nav .nv-sb-item');
