@@ -3,602 +3,2057 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Onul Creative — Daeun Choi</title>
-  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Space+Grotesk:wght@300;400;500&family=Ballet:opsz@16..72&family=EB+Garamond:ital@0;1&family=Monsieur+La+Doulaise&family=Hahmlet&display=block" rel="stylesheet" />
+  <title>Onul Creative Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&family=Raleway:wght@100;200&family=Chakra+Petch:wght@300;400;500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;1,6..96,300;1,6..96,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,200;0,9..144,300;1,9..144,100;1,9..144,200&family=Italiana&family=Cinzel:wght@300;400&family=Gilda+Display&family=Cormorant+SC:wght@300;400&display=swap" rel="stylesheet" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --ink: #111110;
-      --ink-2: #888884;
-      --paper: #ffffff;
-      --serif: 'IM Fell English', 'Times New Roman', Georgia, serif;
-      --sans: 'Space Grotesk', system-ui, sans-serif;
+    @font-face {
+      font-family: 'TeX Gyre Termes';
+      src: url('https://fonts.cdnfonts.com/s/15336/texgyretermes-regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
     }
+  </style>
+  <style>
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       DESIGN SYSTEM
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    :root {
+      --bone:    #F4F1EC;
+      --ink:     #211F1C;
+      --muted:   #847E70;
+      --accent:  #4A5D50;
+      --rule:    rgba(33,31,28,0.10);
+      --display: 'Cormorant Garamond', Georgia, serif;
+      --body:    'Inter', system-ui, sans-serif;
+      --gutter:  clamp(1.5rem, 5vw, 4rem);
+      --max-w:   1320px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      margin: 0; padding: 0;
-      font-family: var(--sans);
-      background: var(--paper);
+      background: var(--bone);
       color: var(--ink);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.65;
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-    .page { display: none !important; min-height: 100vh; }
-    .page.active { display: block !important; }
 
-    /* Portfolio floating logo */
-    #portfolio-logo {
-      position: fixed;
-      top: -2.2rem;
-      left: 0.2rem;
-      z-index: 300;
-      height: 11.5rem;
-      width: auto;
-      cursor: pointer;
-      opacity: 0.92;
-      filter: none;
-    }
-    #portfolio-logo.white { filter: brightness(0) invert(1); }
+    /* ── ROUTING ── */
+    .page { display: none; }
+    .page.active { display: block; }
 
-    /* ── SPLASH ── */
-    #page-splash {
-      background: #f2efe8;
-      overflow: hidden;
-      height: 100vh;
-      max-height: 100vh;
-      padding: 0;
-      margin: 0;
-    }
-    .pf-splash {
-      position: relative;
-      height: 100vh;
-      width: 100%;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .pf-splash-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .pf-nav-text {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 1.1rem;
-      font-weight: 400;
+    /* ── UTILITIES ── */
+    .u-label {
+      font-family: var(--body);
+      font-size: 0.62rem;
+      font-weight: 500;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: #fff;
-      text-align: center;
-      white-space: nowrap;
-      transition: opacity 0.2s;
+      color: var(--muted);
     }
-    .pf-nav-text:hover { opacity: 0.6; }
+    .wrap {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+    }
 
-    /* ── WORK PAGE ── */
-    #page-work {
-      background: url('portfolio_wokpage_background.png') center center / cover no-repeat fixed;
-      overflow-y: auto;
-      font-family: var(--sans);
-      color: #d8ccb8;
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       NAV
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      background: transparent;
+      border-bottom: none;
+      transition: background 0.35s, border-color 0.35s;
     }
-    .pw-nav {
+    body:not(.on-home) .site-nav {
+      background: var(--bone);
+      border-bottom: 1px solid var(--rule);
+    }
+    body.on-nuvela .site-nav { display: none; }
+    body.on-gm .site-nav { display: none; }
+    body.on-home:not(.gallery-active) .nav-left,
+    body.on-home:not(.gallery-active) .nav-right,
+    body.on-home:not(.gallery-active) .nav-logo { visibility: hidden; }
+    body.gallery-active .site-nav { background: transparent; border-bottom: none; }
+    body.gallery-active .nav-link { color: rgba(255,255,255,0.75); }
+    body.gallery-active .nav-link:hover { color: #fff; }
+    body.gallery-active .nav-logo { filter: brightness(0) invert(1); }
+    .site-nav-inner {
+      width: 100%;
+      padding: 0 3rem;
+      box-sizing: border-box;
+      height: 7rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+    }
+    .nav-center {
+      text-align: center;
+    }
+    .nav-center-name {
+      font-family: var(--display);
+      font-weight: 300;
+      font-size: 1.15rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink);
+      line-height: 1;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 2.5rem;
+    }
+    .nav-logo {
+      height: 7rem; width: auto; display: block;
+      cursor: pointer;
+      filter: brightness(0);
+      transition: filter 0.3s, opacity 0.2s;
+      margin-top: -0.5rem;
+    }
+    .nav-logo:hover { opacity: 0.65; }
+    .nav-link {
+      font-family: 'Cormorant SC', serif;
+      font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+      font-weight: 300;
+      font-synthesis: none;
+      letter-spacing: 0.12em;
+      text-transform: none;
+      color: var(--muted);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--ink); }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       HOME — HERO
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .hero {
+      min-height: calc(100vh - 3.75rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: clamp(3rem, 9vh, 7rem) var(--gutter) clamp(2.5rem, 5vh, 4rem);
+    }
+    .hero-eyebrow {
+      font-family: var(--body);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3rem;
+    }
+    .hero-headline {
+      font-family: var(--display);
+      font-weight: 300;
+      font-size: clamp(2.8rem, 6.5vw, 6.2rem);
+      line-height: 1.04;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      max-width: 16ch;
+    }
+    .hero-footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-top: 5rem;
+    }
+    .hero-availability {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+    }
+    .hero-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .hero-avail-text {
+      font-family: var(--body);
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .hero-scroll-label {
+      font-family: var(--body);
+      font-size: 0.58rem;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       HOME — SELECTED WORK
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .selected-work {
+      border-top: 1px solid var(--rule);
+      padding-top: clamp(3rem, 7vh, 5.5rem);
+      padding-bottom: clamp(4rem, 10vh, 8rem);
+    }
+    .section-head {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+    }
+    .section-view-all {
+      font-family: var(--body);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .section-view-all:hover { color: var(--ink); }
+
+    /* asymmetric grid */
+    .work-grid {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 var(--gutter);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .work-card {
+      cursor: pointer;
+      display: block;
+    }
+    .wc-img {
+      overflow: hidden;
+      background: #E3DFD8;
+      display: block;
+      width: 100%;
+    }
+    .wc-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .work-card:hover .wc-img img { transform: scale(1.04); }
+    .wc-placeholder { width: 100%; height: 100%; }
+    .wc-meta {
+      padding: 1.2rem 0 2.8rem;
+    }
+    .wc-tag {
+      font-family: var(--body);
+      font-size: 0.56rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+    }
+    .wc-title {
+      font-family: var(--display);
+      font-weight: 300;
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 0.3rem;
+    }
+    .wc-role {
+      font-family: var(--body);
+      font-size: 0.66rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* card image heights */
+    .card-a .wc-img { aspect-ratio: 3/4; }
+    .card-b .wc-img { aspect-ratio: 4/5; }
+    .card-c .wc-img { aspect-ratio: 16/9; }
+    .card-d .wc-img { aspect-ratio: 16/9; }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       HOME — ABOUT TEASER
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .about-teaser {
+      border-top: 1px solid var(--rule);
+      padding: clamp(5rem, 12vh, 9rem) var(--gutter);
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: clamp(2rem, 6vw, 6rem);
+      align-items: start;
+    }
+    .at-label { padding-top: 0.5rem; }
+    .at-body {
+      font-family: var(--display);
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(1.15rem, 1.8vw, 1.45rem);
+      line-height: 1.8;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+      max-width: 580px;
+    }
+    .at-body p { margin-bottom: 1.3rem; }
+    .at-body p:last-of-type { margin-bottom: 0; }
+    .at-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 2.2rem;
+      font-family: var(--body);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      cursor: pointer;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 2px;
+      transition: color 0.2s;
+    }
+    .at-link:hover { color: var(--accent); }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       FOOTER
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .site-footer {
+      border-top: 1px solid var(--rule);
+      padding: 3.5rem var(--gutter) 2.5rem;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .footer-wordmark {
+      font-family: var(--display);
+      font-weight: 300;
+      font-size: 1rem;
+      letter-spacing: 0.22em;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .footer-wordmark-sub {
+      font-family: var(--body);
+      font-size: 0.56rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.2rem;
+    }
+    .footer-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+    .footer-nav a {
+      font-family: var(--body);
+      font-size: 0.62rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: var(--ink); }
+    .footer-contact-col {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .footer-contact-item {
+      font-family: var(--body);
+      font-size: 0.7rem;
+      color: var(--muted);
+    }
+    .footer-contact-item a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-contact-item a:hover { color: var(--ink); }
+    .footer-avail {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+      font-family: var(--body);
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .footer-avail-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+    .footer-bottom {
+      border-top: 1px solid var(--rule);
+      padding-top: 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 2rem 5vw;
     }
-    .pw-nav-links { display: flex; gap: 2.8rem; }
-    .pw-nav-item {
-      font-size: 0.6rem;
+    .footer-copy {
+      font-family: var(--body);
+      font-size: 0.58rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+    .footer-resume {
+      font-family: var(--body);
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 1px;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .footer-resume:hover { border-color: var(--ink); color: var(--accent); }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       SCAFFOLD PAGES
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    .scaffold {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-end;
+      padding: clamp(4rem, 10vh, 8rem) var(--gutter) clamp(3rem, 7vh, 6rem);
+      max-width: var(--max-w);
+      margin: 0 auto;
+      border-bottom: 1px solid var(--rule);
+    }
+    .scaffold-label { margin-bottom: 1.2rem; }
+    .scaffold-title {
+      font-family: var(--display);
+      font-weight: 300;
+      font-size: clamp(2.5rem, 6vw, 5.5rem);
+      letter-spacing: 0.02em;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .scaffold-note {
+      font-family: var(--body);
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       RESPONSIVE
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       NUVELA CASE STUDY — REDESIGN
+    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+    #page-nuvela.active { display: block !important; min-height: 100vh; }
+
+    /* top nav */
+    .nv-topnav {
+      position: sticky; top: 0; z-index: 100;
+      height: 3.2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem;
+      background: var(--bone);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nv-topnav-back {
+      font-family: var(--body); font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted); cursor: pointer;
+      transition: color 0.2s;
+    }
+    .nv-topnav-back:hover { color: var(--ink); }
+    .nv-topnav-center {
+      font-family: var(--display); font-weight: 300; font-style: italic;
+      font-size: 1rem; color: var(--ink); letter-spacing: 0.04em;
+    }
+    .nv-topnav-year {
+      font-family: var(--body); font-size: 0.6rem; letter-spacing: 0.1em; color: var(--muted);
+    }
+
+    /* hero */
+    .nv-hero {
+      display: grid; grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 3.2rem);
+    }
+    .nv-hero-left {
+      padding: 4.5rem 4rem 4rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+      border-right: 1px solid var(--rule);
+    }
+    .nv-hero-label {
+      font-family: var(--body); font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 2rem;
+    }
+    .nv-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      letter-spacing: 0.2em;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+    }
+    .nv-tagline {
+      font-family: var(--body); font-size: 0.72rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 2rem;
+    }
+    .nv-desc {
+      font-family: var(--body); font-size: 0.88rem; line-height: 1.8;
+      color: var(--muted); max-width: 44ch;
+    }
+    .nv-hero-right {
+      position: relative; overflow: hidden;
+    }
+    .nv-hero-right img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block;
+    }
+
+    /* meta strip */
+    .nv-meta-strip {
+      display: flex;
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nv-meta-cell {
+      flex: 1; padding: 1.6rem 3rem;
+      border-right: 1px solid var(--rule);
+    }
+    .nv-meta-cell:last-child { border-right: none; }
+    .nv-meta-label {
+      font-family: var(--body); font-size: 0.58rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 0.4rem;
+    }
+    .nv-meta-val {
+      font-family: var(--body); font-size: 0.78rem; color: var(--ink); line-height: 1.5;
+    }
+
+    /* philosophy */
+    .nv-philosophy {
+      background: #1B1916;
+      padding: 8rem 3rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .nv-philosophy-quote {
+      font-family: var(--display); font-weight: 300; font-style: italic;
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      color: rgba(255,255,255,0.82);
+      line-height: 1.5; text-align: center; max-width: 700px;
+    }
+
+    /* section label shared */
+    .nv-sec-label {
+      font-family: var(--body); font-size: 0.58rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 2rem;
+    }
+
+    /* system — color + type */
+    .nv-system {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .nv-system-col {
+      padding: 4rem 3.5rem;
+    }
+    .nv-system-col:first-child { border-right: 1px solid var(--rule); }
+
+    /* color swatches */
+    .nv-swatches { display: flex; gap: 6px; margin-bottom: 0.8rem; }
+    .nv-swatch-item { display: flex; flex-direction: column; align-items: center; flex: 1; }
+    .nv-swatch { width: 100%; aspect-ratio: 1; border-radius: 4px; margin-bottom: 0.5rem; }
+    .nv-swatch-name {
+      font-family: var(--body); font-size: 0.54rem; font-weight: 500;
+      letter-spacing: 0.06em; color: var(--ink); margin-bottom: 0.2rem;
+    }
+    .nv-swatch-hex { font-family: var(--body); font-size: 0.48rem; color: var(--muted); }
+
+    /* typography */
+    .nv-type-samples { display: flex; gap: 1rem; }
+    .nv-type-sample { flex: 1; }
+    .nv-type-big {
+      font-size: clamp(2.5rem, 4vw, 3.5rem); line-height: 1; margin-bottom: 0.5rem; color: var(--ink);
+    }
+    .nv-type-raleway { font-family: 'Raleway', sans-serif; font-weight: 200; letter-spacing: 0.15em; }
+    .nv-type-termes  { font-family: 'TeX Gyre Termes', 'Times New Roman', serif; font-weight: 400; }
+    .nv-type-avenir  { font-family: 'Avenir Next Rounded', 'Avenir Next', 'Nunito', sans-serif; font-weight: 400; }
+    .nv-type-name {
+      font-family: var(--body); font-size: 0.54rem; font-weight: 500;
+      color: var(--ink); letter-spacing: 0.06em; margin-bottom: 0.2rem;
+    }
+    .nv-type-role {
+      font-family: var(--body); font-size: 0.5rem; color: var(--muted);
+      letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.6rem;
+    }
+    .nv-type-abc {
+      font-family: var(--body); font-size: 0.44rem; color: var(--muted);
+      line-height: 1.7; word-break: break-all;
+    }
+
+    /* logo section */
+    .nv-logo-section {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      padding: 5rem 4rem; align-items: center;
+      border-bottom: 1px solid var(--rule);
+    }
+    .nv-logo-desc {
+      font-family: var(--body); font-size: 0.88rem; line-height: 1.8;
+      color: var(--muted); max-width: 36ch;
+    }
+    .nv-logo-img { width: 100%; max-width: 340px; height: auto; display: block; }
+
+    /* products */
+    .nv-products { padding: 5rem 3rem; border-bottom: 1px solid var(--rule); }
+    .nv-product-names {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem;
+    }
+    .nv-product-item { display: flex; flex-direction: column; }
+    .nv-product-name {
+      font-family: var(--body); font-size: 0.58rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin-bottom: 0.15rem;
+    }
+    .nv-product-sub {
+      font-family: var(--body); font-size: 0.52rem; color: var(--muted);
+      letter-spacing: 0.06em; margin-bottom: 0.8rem;
+    }
+    .nv-product-img { overflow: hidden; }
+    .nv-product-img img { width: 100%; height: 280px; object-fit: contain; object-position: center; display: block; }
+
+    /* campaign */
+    .nv-campaign { padding: 5rem 3rem 0; }
+    .nv-campaign-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .nv-campaign-img { }
+    .nv-campaign-img img { width: 100%; height: auto; display: block; }
+
+    /* nuvela page footer */
+    .nv-footer {
+      padding: 2rem 3rem;
+      border-top: 1px solid var(--rule);
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 4rem;
+    }
+    .nv-footer-link {
+      font-family: var(--body); font-size: 0.6rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--muted); cursor: pointer; transition: color 0.2s;
+    }
+    .nv-footer-link:hover { color: var(--ink); }
+    .nv-footer-copy {
+      font-family: var(--body); font-size: 0.58rem; color: var(--muted); letter-spacing: 0.06em;
+    }
+
+    /* old sidebar (hidden/unused now) */
+    .nv-sidebar {
+      position: sticky;
+      top: 0;
+      align-self: start;
+      height: 100vh;
+      border-right: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+      padding: 2rem 1.4rem 1.6rem;
+      background: var(--bone);
+      overflow-y: auto;
+    }
+    .nv-sb-logo { margin-bottom: 2.5rem; cursor: pointer; }
+    .nv-sb-logo-name {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 0.78rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+    .nv-sb-logo-sub {
+      font-family: var(--body);
+      font-size: 0.5rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 0.25rem;
+    }
+    .nv-sb-nav { flex: 1; display: flex; flex-direction: column; gap: 0; }
+    .nv-sb-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.7rem;
+      padding: 0.7rem 0.5rem;
+      cursor: pointer;
+      border-left: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+    .nv-sb-item.active { border-left-color: var(--ink); background: rgba(33,31,28,0.03); }
+    .nv-sb-item:hover:not(.active) { border-left-color: var(--rule); }
+    .nv-sb-num {
+      font-family: var(--body);
+      font-size: 0.56rem;
+      font-weight: 400;
+      color: var(--muted);
+      padding-top: 0.1rem;
+      flex-shrink: 0;
+      width: 1.2rem;
+    }
+    .nv-sb-item.active .nv-sb-num { color: var(--ink); }
+    .nv-sb-info {}
+    .nv-sb-title {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 0.9rem;
+      letter-spacing: 0.01em;
+      color: var(--muted);
+      line-height: 1.2;
+    }
+    .nv-sb-item.active .nv-sb-title { color: var(--ink); }
+    .nv-sb-sub {
+      font-family: var(--body);
+      font-size: 0.52rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-top: 0.15rem;
+    }
+    .nv-sb-footer {
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .nv-sb-footer-link {
+      font-family: var(--body);
+      font-size: 0.56rem;
       font-weight: 400;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #a89e8e;
+      color: var(--muted);
       cursor: pointer;
+      text-decoration: none;
+      transition: color 0.2s;
     }
-    .pw-nav-item.active { color: #e0d4bc; border-bottom: 1px solid #e0d4bc; padding-bottom: 2px; }
-    .pw-hero {
+    .nv-sb-footer-link:hover { color: var(--ink); }
+    .nv-sb-copy {
+      font-family: var(--body);
+      font-size: 0.5rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* main content */
+    .nv-main { overflow-y: auto; }
+
+    /* hero section */
+    .nv-hero {
       display: grid;
-      grid-template-columns: 48% 52%;
-      align-items: center;
-      padding: 3rem 5vw 5rem;
-      min-height: 50vh;
+      grid-template-columns: 42% 58%;
+      min-height: 100vh;
+      border-bottom: 1px solid var(--rule);
     }
-    .pw-hero-title {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: clamp(5rem, 10vw, 9rem);
-      font-weight: 400;
-      color: #e8ddc8;
-      line-height: 1;
-      margin-bottom: 1.6rem;
+    .nv-hero-left {
+      padding: 2.5rem 2.5rem 2.5rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid var(--rule);
     }
-    .pw-hero-sub {
-      font-size: 0.82rem;
-      line-height: 1.75;
-      color: #a09080;
-      max-width: 290px;
-      margin-bottom: 3rem;
-    }
-    .pw-scroll-hint {
+    .nv-hero-meta {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      font-size: 0.55rem;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .nv-hero-num {
+      font-family: var(--body);
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .nv-hero-cat {
+      font-family: var(--body);
+      font-size: 0.6rem;
+      font-weight: 500;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: #7a6e5e;
+      color: var(--muted);
     }
-    .pw-scroll-dot {
-      width: 1.6rem;
-      height: 1.6rem;
+    .nv-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 100;
+      font-size: clamp(1.6rem, 3.2vw, 3rem);
+      letter-spacing: 0.45em;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 1.2rem;
+    }
+    .nv-tagline {
+      font-family: var(--body);
+      font-size: 0.62rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 1.8rem;
+    }
+    .nv-desc {
+      font-family: var(--body);
+      font-size: 0.82rem;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 360px;
+      margin-bottom: 2rem;
+    }
+    .nv-rule { border: none; border-top: 1px solid var(--rule); margin-bottom: 1.5rem; }
+    .nv-meta-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .nv-meta-row { display: flex; gap: 1.5rem; align-items: baseline; }
+    .nv-meta-label {
+      font-family: var(--body);
+      font-size: 0.56rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      width: 3.5rem;
+      flex-shrink: 0;
+    }
+    .nv-meta-val {
+      font-family: var(--body);
+      font-size: 0.76rem;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+    .nv-hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .nv-hero-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .nv-vertical-text {
+      position: absolute;
+      right: -0.8rem;
+      top: 50%;
+      transform: translateY(-50%) rotate(90deg);
+      transform-origin: center center;
+      font-family: var(--body);
+      font-size: 0.5rem;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--bone);
+      white-space: nowrap;
+      mix-blend-mode: difference;
+    }
+
+    /* breakdown section */
+    .nv-breakdown {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+    .nv-breakdown-col {
+      padding: 2rem 1.6rem;
+      border-right: 1px solid var(--rule);
+    }
+    .nv-breakdown-col:last-child { border-right: none; }
+    /* logo section — full width row below the 3-col strip */
+    .nv-logo-section {
+      border-top: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule);
+      padding: 2.5rem 2rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 3rem;
+    }
+    .nv-logo-section .nv-col-label { margin-bottom: 1.4rem; }
+    .nv-logo-section-inner { display: flex; align-items: flex-start; gap: 2.5rem; flex: 1; }
+    .nv-col-label {
+      font-family: var(--body);
+      font-size: 0.52rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+
+    /* philosophy */
+    .nv-philosophy-bg {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #C8C2B8;
+      margin-bottom: 1.2rem;
+      overflow: hidden;
+    }
+    .nv-philosophy-bg img { width: 100%; height: 100%; object-fit: cover; }
+    .nv-philosophy-quote {
+      font-family: var(--display);
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(0.95rem, 1.4vw, 1.25rem);
+      line-height: 1.55;
+      color: var(--ink);
+      letter-spacing: 0.01em;
+    }
+
+    /* visual language grid */
+    .nv-vl-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+    .nv-vl-item { display: flex; flex-direction: column; }
+    .nv-vl-img {
+      aspect-ratio: 1;
+      background: #D8D3CC;
+      overflow: hidden;
+    }
+    .nv-vl-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .nv-vl-cap {
+      font-family: var(--body);
+      font-size: 0.48rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 0.35rem 0 0.5rem;
+      text-align: center;
+    }
+
+    /* color swatches */
+    .nv-swatches { display: flex; gap: 4px; margin-bottom: 0.8rem; }
+    .nv-swatch-item { display: flex; flex-direction: column; align-items: center; flex: 1; }
+    .nv-swatch {
+      width: 100%;
+      aspect-ratio: 1;
       border-radius: 50%;
-      border: 1px solid #7a6e5e;
+      margin-bottom: 0.4rem;
+    }
+    .nv-swatch-name {
+      font-family: var(--body);
+      font-size: 0.42rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-align: center;
+    }
+    .nv-swatch-hex {
+      font-family: var(--body);
+      font-size: 0.4rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* typography samples */
+    .nv-type-section-label {
+      font-family: var(--body);
+      font-size: 0.52rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 1.4rem 0 0.8rem;
+    }
+    .nv-type-samples { display: flex; gap: 0.8rem; }
+    .nv-type-sample { flex: 1; }
+    .nv-type-big {
+      font-family: var(--display);
+      font-weight: 400;
+      font-size: 2rem;
+      line-height: 1;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+    }
+    .nv-type-big.sans {
+      font-family: var(--body);
+      font-weight: 400;
+    }
+    .nv-type-big.light {
+      font-family: var(--body);
+      font-weight: 300;
+      font-size: 0.68rem;
+      line-height: 1.4;
+    }
+    .nv-type-raleway { font-family: 'Raleway', sans-serif; font-weight: 200; letter-spacing: 0.15em; }
+    .nv-type-termes  { font-family: 'TeX Gyre Termes', 'Times New Roman', serif; font-weight: 400; }
+    .nv-type-avenir  { font-family: 'Avenir Next Rounded', 'Avenir Next', 'Nunito', sans-serif; font-weight: 400; }
+    .nv-type-role {
+      font-family: var(--body);
+      font-size: 0.42rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.4rem;
+    }
+    .nv-type-name {
+      font-family: var(--body);
+      font-size: 0.48rem;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
+    }
+    .nv-type-abc {
+      font-family: var(--body);
+      font-size: 0.42rem;
+      color: var(--muted);
+      line-height: 1.6;
+      word-break: break-all;
+    }
+
+    /* logo system */
+    .nv-logo-lockup { display: flex; flex-direction: column; align-items: flex-start; }
+    .nv-logo-img { width: 100%; max-width: 320px; height: auto; display: block; }
+    .nv-logo-wordmark {
+      font-family: var(--display);
+      font-weight: 300;
+      font-size: clamp(1rem, 1.6vw, 1.4rem);
+      letter-spacing: 0.35em;
+      color: var(--ink);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .nv-logo-icon {
+      width: 64px;
+      margin-bottom: 0.5rem;
+    }
+    .nv-logo-icon svg { width: 100%; height: auto; display: block; }
+    .nv-logo-variant-label {
+      font-family: var(--body);
+      font-size: 0.58rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 0.3rem;
+    }
+    .nv-logo-desc {
+      font-family: var(--body);
+      font-size: 0.66rem;
+      line-height: 1.7;
+      color: var(--muted);
+      margin-top: 1.2rem;
+    }
+
+    /* product collection */
+    .nv-products {
+      padding: 2rem 2.5rem 3rem;
+    }
+    .nv-products .nv-col-label { margin-bottom: 1.5rem; }
+    .nv-product-names {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+      margin-bottom: 0.8rem;
+    }
+    .nv-product-item { display: flex; flex-direction: column; }
+    .nv-product-name {
+      font-family: var(--body);
+      font-size: 0.52rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink);
+      margin-bottom: 0.15rem;
+    }
+    .nv-product-sub {
+      font-family: var(--body);
+      font-size: 0.48rem;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      margin-bottom: 0.7rem;
+    }
+    .nv-product-img {
+      height: 340px;
+      background: none;
+      overflow: hidden;
+    }
+    .nv-product-img img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
+
+    /* campaign */
+    .nv-campaign {
+      padding: 2.5rem 2rem 3rem;
+      border-top: 1px solid var(--rule);
+    }
+    .nv-campaign .nv-col-label { margin-bottom: 1.5rem; }
+    .nv-campaign-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .nv-campaign-img { overflow: hidden; }
+    .nv-campaign-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    @media (max-width: 860px) {
+      .work-grid { grid-template-columns: 1fr; }
+      .card-a .wc-img,
+      .card-b .wc-img { aspect-ratio: 4/3; }
+      .about-teaser { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 580px) {
+      .nav-links li:not(:last-child) { display: none; }
+      .hero-footer { flex-direction: column; gap: 1.5rem; align-items: flex-start; }
+      .hero-scroll-label { display: none; }
+    }
+
+    /* ─── Home: About section ─── */
+    .pm-about {
+      height: 100vh;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .pm-about-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+    .pm-about-location {
+      position: absolute;
+      right: 7%;
+      top: 62%;
+      width: clamp(220px, 28vw, 360px);
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(1rem, 1.6vw, 1.45rem);
+      line-height: 1.75;
+      letter-spacing: 0.03em;
+      color: rgba(255,255,255,0.80);
+      z-index: 2;
+    }
+    .pm-about-blurb {
+      position: absolute;
+      right: 7%;
+      top: 16%;
+      width: clamp(220px, 28vw, 360px);
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(1rem, 1.6vw, 1.45rem);
+      line-height: 1.75;
+      letter-spacing: 0.03em;
+      color: rgba(255,255,255,0.88);
+      z-index: 2;
+    }
+    .pm-about-name {
+      position: absolute;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      line-height: 1;
+      z-index: 2;
+    }
+    .pm-about-name span {
+      font-family: 'Cormorant SC', serif;
+      font-weight: 300;
+      font-style: normal;
+      font-synthesis: none;
+      font-size: clamp(2rem, 3.8vw, 4.5rem);
+      letter-spacing: 0.12em;
+      color: #F4F1EC;
+      display: block;
+      text-shadow: none;
+    }
+    .pm-about-nav {
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0;
+      z-index: 2;
+    }
+    .pm-about-nav a {
+      height: clamp(2rem, 3.8vw, 4.5rem);
+      display: flex;
+      align-items: center;
+      font-family: 'Cormorant SC', serif;
+      font-weight: 300;
+      font-size: clamp(0.85rem, 1.4vw, 1.2rem);
+      letter-spacing: 0.12em;
+      color: #F4F1EC;
+      text-decoration: none;
+      text-transform: none;
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .pm-about-nav a:hover { opacity: 1; }
+    /* landing logo top-left */
+    .pm-about-logo {
+      position: absolute;
+      top: -1rem;
+      left: -0.5rem;
+      z-index: 10;
+      height: 8rem;
+      width: auto;
+      filter: brightness(0) invert(1) sepia(1) saturate(0.1) brightness(0.97);
+      opacity: 0.9;
+    }
+    .pm-about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      width: 100%;
+      align-items: end;
+    }
+    .pm-about-label {
+      font-family: var(--body);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .pm-about-headline {
+      font-family: var(--display);
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(2rem, 4vw, 3.8rem);
+      line-height: 1.18;
+      color: var(--ink);
+      margin: 0 0 3rem;
+    }
+    .pm-about-footer {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+    }
+    .pm-avail {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--body);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .pm-avail-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: #5C8A5C;
+      flex-shrink: 0;
+    }
+    .pm-about-link {
+      font-family: var(--body);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .pm-about-link:hover { text-decoration: underline; }
+    .pm-about-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 3rem;
+    }
+    .pm-about-bio {
+      font-family: var(--body);
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 42ch;
+    }
+    .pm-scroll-hint {
+      font-family: var(--body);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── Home: Horizontal scroll work section ─── */
+    .pm-work-scroll {
+      height: 400vh;
+      position: relative;
+    }
+    .pm-work-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 8rem 3rem 2rem 3rem;
+      box-sizing: border-box;
+      background: #000;
+    }
+    .pm-work-track {
+      display: flex;
+      height: 100%;
+      will-change: transform;
+      transition: transform 0.05s linear;
+      gap: 1rem;
+    }
+    .pm-panel {
+      flex-shrink: 0;
+      width: 58vw;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+    }
+    .pm-panel-img {
+      flex: 1;
+      overflow: hidden;
+    }
+    .pm-panel-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .pm-panel:hover .pm-panel-img img { transform: scale(1.03); }
+    .pm-panel-img--placeholder { flex: 1; }
+    .pm-panel-meta {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 2.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+    .pm-panel-num {
+      font-family: var(--body);
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.6);
+    }
+    .pm-panel-tag {
+      font-family: var(--body);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.75);
+    }
+    .pm-panel-title {
+      font-family: var(--display);
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(1.4rem, 2.8vw, 2.5rem);
+      color: #fff;
+      line-height: 1.1;
+    }
+    /* Dark overlay so text reads over photos */
+    .pm-panel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    /* Panels with placeholder bg get ink-toned overlay */
+    .pm-panel-img--placeholder + .pm-panel-meta { }
+
+    @media (max-width: 860px) {
+      .pm-about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .pm-about { padding: 4rem 2rem; }
+      .pm-panel { width: 90vw; }
+    }
+
+    /* ─── Gentle Monster Case Study ─── */
+    #page-gm.active { display: block !important; }
+
+    .gm-hero-wrapper {
+      position: relative;
+    }
+    .gm-hero {
+      width: 100%; height: 100vh;
+      position: sticky; top: 0;
+      overflow: hidden;
+    }
+    .gm-hero img {
+      width: 100%; height: 100%; object-fit: cover; object-position: center; display: block;
+    }
+    .gm-hero-back {
+      position: absolute; top: 2rem; left: 2.5rem;
+      font-family: var(--body); font-size: 0.6rem; letter-spacing: 0.16em;
+      text-transform: uppercase; color: rgba(255,255,255,0.75);
+      cursor: pointer; transition: color 0.2s; z-index: 10;
+    }
+    .gm-hero-back:hover { color: #fff; }
+
+    /* intro */
+    .gm-intro {
+      background: #111009;
+      padding: 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      border-radius: 24px;
+      margin: 10vh 1.5rem 10vh;
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+    }
+    .gm-intro-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 12px;
+    }
+    .gm-title {
+      font-family: 'Chakra Petch', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      font-size: clamp(2.8rem, 5.5vw, 5.5rem);
+      color: #fff;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+    .gm-intro-right {
+      display: flex; flex-direction: column; gap: 2rem;
+    }
+    .gm-intro-sub {
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.7rem; letter-spacing: 0.06em;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .gm-desc {
+      font-family: 'Courier Prime', monospace;
+      font-size: 1rem; line-height: 1.85;
+      color: rgba(255,255,255,0.9);
+    }
+    .gm-meta {
+      display: flex; flex-direction: column; gap: 0.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.5rem;
+    }
+    .gm-meta-row { display: flex; gap: 1.5rem; }
+    .gm-meta-label {
+      font-family: 'Courier Prime', monospace; font-size: 0.6rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.25);
+      min-width: 60px;
+    }
+    .gm-meta-val {
+      font-family: 'Courier Prime', monospace; font-size: 0.72rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* centered portrait image */
+    .gm-portrait {
+      background: #0e0c09;
+      display: flex; justify-content: center; align-items: center;
+      padding: 5rem 0;
+    }
+    .gm-portrait img { width: 38%; max-width: 520px; height: auto; display: block; }
+
+    /* two-col — unified background to normalize image whites */
+    .gm-two-col {
+      display: grid; grid-template-columns: 1fr 1fr;
+    }
+    .gm-two-col .gm-col {
+      background: #ECEAE5;
+      display: flex; justify-content: center; align-items: center;
+      padding: 4rem 3rem;
+    }
+    .gm-two-col .gm-col img { width: 100%; max-width: 520px; height: auto; display: block; }
+
+    /* full-width single image */
+    .gm-full-img { margin: 0 1.5rem; overflow: hidden; }
+    .gm-full-img img { width: 100%; height: auto; display: block; }
+
+    .gm-col--dark { background: #0e0c09; }
+
+    /* gmproduct full-bleed */
+    .gm-fullscreen-img {
+      background: #111009;
+    }
+    .gm-fullscreen-img img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* horizontal scroll gallery */
+    .gm-hscroll-wrapper {
+      height: 300vh;
+      background: #111009;
+    }
+    .gm-hscroll-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .gm-hscroll-track {
+      display: flex;
+      height: 100%;
+      will-change: transform;
+    }
+    /* each screen = one full viewport width */
+    .gm-hscreen {
+      flex-shrink: 0;
+      width: 100vw;
+      height: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
-    }
-    .pw-scroll-dot::after {
-      content: '';
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: #7a6e5e;
-    }
-    .pw-hero-circle {
-      width: 62%;
-      aspect-ratio: 1;
-      border-radius: 50%;
-      overflow: hidden;
-      margin: 0 auto;
-    }
-    .pw-hero-circle img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .pw-list { padding: 0 5vw 3rem; display: flex; flex-direction: column; gap: 1.2rem; }
-    .pw-item {
-      display: grid;
-      grid-template-columns: 35% 65%;
-      border: 1px solid rgba(200,175,140,0.18);
-      cursor: pointer;
-      transition: border-color 0.2s;
-    }
-    .pw-item:hover { border-color: rgba(200,175,140,0.45); }
-    .pw-item-meta { padding: 3rem 2.5rem; display: flex; flex-direction: column; }
-    .pw-item-index { font-size: 0.66rem; color: #6a5e50; margin-bottom: 1.2rem; }
-    .pw-item-title {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
-      font-weight: 400;
-      text-transform: uppercase;
-      color: #e8ddc8;
-      line-height: 1.05;
-      margin-bottom: 0.3rem;
-    }
-    .pw-item-subtitle {
-      font-size: 0.54rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #7a6e5e;
-      margin-bottom: 1.2rem;
-    }
-    .pw-item-rule { width: 2rem; border: none; border-top: 1px solid rgba(200,175,140,0.25); margin: 0 0 1.4rem; }
-    .pw-item-desc { font-size: 0.78rem; line-height: 1.72; color: #9a8e7e; max-width: 220px; margin-bottom: 2.5rem; }
-    .pw-item-cta {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-size: 0.58rem;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: #c0b09a;
-      border-bottom: 1px solid rgba(200,175,140,0.35);
-      padding-bottom: 3px;
-      width: fit-content;
-      margin-top: auto;
-    }
-    .pw-item-img { overflow: hidden; }
-    .pw-item-img img { display: block; width: 100%; height: 100%; object-fit: cover; }
-    .pw-footer {
-      display: flex;
-      justify-content: space-between;
-      padding: 1.8rem 5vw;
-      border-top: 1px solid rgba(200,175,140,0.12);
-      font-size: 0.54rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: #5a5040;
-      margin-top: 2rem;
-    }
-
-    /* ── PORTFOLIO DETAIL ── */
-    #page-detail {
-      background: #f2efe8;
-      overflow-y: auto;
-      min-height: 100vh;
-    }
-    .pf-detail-inner { padding: 8rem 7vw 6rem; max-width: 1100px; margin: 0 auto; }
-    .pf-detail-header { margin-bottom: 4rem; }
-    .pf-detail-eyebrow {
-      font-size: 0.56rem;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: #999;
-      margin-bottom: 1rem;
-    }
-    .pf-detail-title {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: clamp(2.5rem, 5vw, 4.5rem);
-      font-weight: 400;
-      text-transform: uppercase;
-      color: #1a1a1a;
-      line-height: 1.05;
-      margin-bottom: 1rem;
-    }
-    .pf-detail-tagline { font-size: 0.9rem; line-height: 1.75; color: #555; max-width: 480px; }
-    .pf-detail-image { display: block; width: 100%; margin-bottom: 0.5rem; }
-    .pf-detail-caption {
-      font-size: 0.72rem;
-      color: #888;
-      letter-spacing: 0.04em;
-      margin-bottom: 4rem;
-    }
-    .pf-detail-rule { border: none; border-top: 1px solid #ddd; margin: 3rem 0; }
-    .pf-detail-footnote { font-size: 0.88rem; line-height: 1.85; color: #444; max-width: 640px; }
-
-    /* ── ABOUT (portfolio-branded) ── */
-    #page-about {
-      background: #0e0d0c;
-      min-height: 100vh;
-      color: rgba(255,255,255,0.75);
-    }
-    #page-about.active { display: flex !important; flex-direction: column; }
-    .about-diptych { display: grid; grid-template-columns: 1fr 1fr; }
-    .about-diptych-img { width: 100%; height: auto; display: block; filter: brightness(0.9); }
-    .about-col { display: flex; flex-direction: column; }
-    .about-name-col {
-      font-family: 'Ballet', cursive;
-      font-weight: 400;
-      font-size: clamp(3rem, 5.5vw, 5.5rem);
-      color: rgba(255,255,255,0.9);
-      line-height: 1.1;
-      padding: 2.5rem 2rem;
-      white-space: nowrap;
-      text-align: center;
-    }
-    .about-bio-col {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: clamp(1rem, 1.3vw, 1.2rem);
-      line-height: 2;
-      color: rgba(255,255,255,0.75);
-      padding: 2.5rem 2rem;
-    }
-    .about-bio-col p { margin-bottom: 1.2rem; }
-
-    /* ── CONTACT (portfolio-branded) ── */
-    #page-contact {
-      background: #0a0a0a;
-      position: relative;
-      overflow: hidden;
-      min-height: 100vh;
-    }
-    #page-contact::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: url('lilies-rotated.png') center center / cover no-repeat;
-      opacity: 0.55;
-      z-index: 0;
-    }
-    .contact-inner { position: relative; z-index: 1; padding: 10rem 2rem 6rem; max-width: 680px; }
-    #page-contact h2 {
-      font-family: 'Ballet', cursive;
-      font-weight: 400;
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      margin-bottom: 3rem;
-      color: #fff;
-    }
-    .contact-form { display: flex; flex-direction: column; }
-    .cf-row { border-bottom: 1px solid rgba(255,255,255,0.3); padding: 1.1rem 0; }
-    .cf-row:first-child { border-top: 1px solid rgba(255,255,255,0.3); }
-    .cf-row input, .cf-row textarea {
-      width: 100%; border: none; background: transparent;
-      font-family: var(--sans); font-size: 14px; color: #fff;
-      outline: none; resize: none; line-height: 1.6;
-    }
-    .cf-row textarea { min-height: 120px; }
-    .cf-row input::placeholder, .cf-row textarea::placeholder { color: rgba(255,255,255,0.45); }
-    .cf-submit {
-      margin-top: 2rem; align-self: flex-start;
-      font-family: var(--sans); font-size: 12px;
-      letter-spacing: 0.1em; text-transform: uppercase;
-      color: #fff; background: none; border: 1px solid rgba(255,255,255,0.6);
-      padding: 0.8rem 2rem; cursor: pointer; transition: background 0.2s, color 0.2s;
-    }
-    .cf-submit:hover { background: #fff; color: #111; }
-    .contact-email {
-      font-family: var(--serif); font-size: 1.1rem;
-      margin-bottom: 2.5rem; color: rgba(255,255,255,0.8);
-    }
-    .contact-email a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.4); }
-
-    /* ── PROCESS (portfolio-branded) ── */
-    #page-process {
-      background: #111;
-      height: 100vh;
-      overflow: hidden;
-      position: relative;
-    }
-    .process-hscroll-track { height: 100vh; overflow: hidden; }
-    .process-hscroll-inner {
-      display: flex;
-      height: 100vh;
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-behavior: smooth;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    .process-hscroll-inner::-webkit-scrollbar { display: none; }
-    .project-card {
-      position: relative;
-      flex: 0 0 calc(50vw - 1rem);
-      height: 100vh;
-      overflow: hidden;
-      cursor: pointer;
-      border-radius: 12px;
-      margin: 1rem 0.5rem;
-    }
-    .project-card:first-child { margin-left: 1rem; }
-    .project-card:last-child  { margin-right: 1rem; }
-    .project-card-img {
-      width: 100%; height: 100%; object-fit: cover; display: block;
-      transition: transform 0.6s ease, filter 0.4s ease;
-    }
-    .project-card:hover .project-card-img { transform: scale(1.03); filter: blur(6px) brightness(0.6); }
-    .project-card-bg {
-      width: 100%; height: 100%;
-      background: #1e1e1e;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .project-card-bg-text { font-style: italic; color: #444; font-size: 1rem; }
-    .project-card-label {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Ballet', cursive; font-weight: 400;
-      font-size: clamp(1.6rem, 3vw, 2.8rem);
-      color: #fff; line-height: 1.1; text-align: center;
+      gap: 2rem;
       padding: 2rem;
-      opacity: 0; transition: opacity 0.4s ease;
-      pointer-events: none;
+      box-sizing: border-box;
     }
-    .project-card:hover .project-card-label { opacity: 1; }
+    .gm-card {
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      max-width: calc(50% - 1rem);
+      height: calc(100vh - 4rem);
+    }
+    .gm-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
 
-    /* Lightbox */
-    .lightbox {
-      display: none;
-      position: fixed; inset: 0; z-index: 999;
-      background: rgba(0,0,0,0.92);
-      align-items: center; justify-content: center;
-      cursor: zoom-out;
+    /* gm footer */
+    .gm-footer {
+      background: #111009;
+      padding: 2rem 3rem;
+      margin: 2rem 1.5rem 0;
+      border-radius: 20px;
+      display: flex; justify-content: space-between; align-items: center;
     }
-    .lightbox.open { display: flex; }
-    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; display: block; }
+    .gm-footer-link {
+      font-family: var(--body); font-size: 0.6rem; letter-spacing: 0.14em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
+      cursor: pointer; transition: color 0.2s;
+    }
+    .gm-footer-link:hover { color: rgba(255,255,255,0.9); }
+    .gm-footer-copy {
+      font-family: var(--body); font-size: 0.58rem;
+      color: rgba(255,255,255,0.25); letter-spacing: 0.06em;
+    }
   </style>
 </head>
 <body>
 
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <img id="lightbox-img" src="" alt="" onclick="event.stopPropagation()" />
-  </div>
-
-  <!-- Floating logo — always visible, click goes to splash -->
-  <img id="portfolio-logo" src="portfolio_Logo_Transparent.png" alt="Onul Creative" onclick="showPage('splash')" />
-
-  <!-- SPLASH -->
-  <div id="page-splash" class="page active">
-    <div class="pf-splash">
-      <img class="pf-splash-img" src="Portfolioload page.png" alt="" />
-      <button class="pf-nav-text" style="left:54%;top:50%;" onclick="showPage('work')">Work</button>
-      <button class="pf-nav-text" style="left:33%;top:74%;color:#1a1a1a;font-size:1.4rem;" onclick="showPage('about')">About</button>
-      <button class="pf-nav-text" style="left:77%;top:80%;color:#1a1a1a;font-size:1.4rem;" onclick="showPage('contact')">Contact</button>
-      <button class="pf-nav-text" style="left:74.8%;top:29%;" onclick="showPage('process')">Process</button>
+  <!-- ━━━━ PERSISTENT NAV ━━━━ -->
+  <header class="site-nav">
+    <div class="site-nav-inner">
+      <div class="nav-left">
+        <img class="nav-logo" src="onul-studio-logo_1.svg" alt="Onul Creative" onclick="showPage('home')" />
+      </div>
+      <nav class="nav-right">
+        <a class="nav-link" onclick="showPage('work')">work</a>
+        <a class="nav-link" onclick="showPage('about')">about</a>
+        <a class="nav-link" onclick="showPage('contact')">contact</a>
+      </nav>
     </div>
-  </div>
+  </header>
 
-  <!-- WORK -->
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       HOME
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div id="page-home" class="page active">
+
+    <!-- ① About -->
+    <section class="pm-about">
+      <img class="pm-about-bg" src="landingfinal.png" alt="" />
+      <img src="onul-studio-logo_1.svg" alt="Onul Creative Studio" class="pm-about-logo" />
+      <div class="pm-about-name">
+        <span>ONUL</span>
+        <span>CREATIVE</span>
+        <span>STUDIO</span>
+      </div>
+      <nav class="pm-about-nav">
+        <a href="#" onclick="showPage('work');return false;">work</a>
+        <a href="#" onclick="showPage('about');return false;">about</a>
+        <a href="#" onclick="showPage('contact');return false;">contact</a>
+      </nav>
+    </section>
+
+    <!-- ② Horizontal scroll work gallery -->
+    <section class="pm-work-scroll" id="pm-work-scroll">
+      <div class="pm-work-sticky" id="pm-work-sticky">
+        <div class="pm-work-track" id="pm-work-track">
+
+          <!-- 01 Gentle Monster -->
+          <div class="pm-panel" onclick="showPage('gm')">
+            <div class="pm-panel-img">
+              <img src="gmc2.png" alt="Gentle Monster Aftermath" loading="lazy" />
+            </div>
+          </div>
+
+        </div><!-- /track -->
+      </div><!-- /sticky -->
+    </section>
+
+
+  </div><!-- /page-home -->
+
+  <!-- ━━━━ SCAFFOLD: WORK ━━━━ -->
   <div id="page-work" class="page">
-    <nav class="pw-nav">
-      <div></div>
-      <div class="pw-nav-links">
-        <span class="pw-nav-item active">Work</span>
-        <span class="pw-nav-item" onclick="showPage('process')">Process</span>
-        <span class="pw-nav-item" onclick="showPage('contact')">Contact</span>
-        <span class="pw-nav-item" onclick="showPage('about')">About</span>
-      </div>
-    </nav>
-    <div class="pw-hero">
-      <div class="pw-hero-left">
-        <h1 class="pw-hero-title">Work</h1>
-        <p class="pw-hero-sub">Visual storytelling, concept development, and AI-assisted production for thoughtful brands.</p>
-        <div class="pw-scroll-hint"><div class="pw-scroll-dot"></div><span>Scroll to explore</span></div>
-      </div>
-      <div class="pw-hero-right">
-        <div class="pw-hero-circle">
-          <img src="NuvelaAd1.png" alt="" />
-        </div>
-      </div>
-    </div>
-    <div class="pw-list" id="pw-list"></div>
-    <div class="pw-footer">
-      <span>© Onul Creative</span>
-      <span>Based in Bellevue, WA</span>
+    <div class="scaffold wrap">
+      <p class="u-label scaffold-label">Work</p>
+      <h2 class="scaffold-title">Case Studies</h2>
+      <p class="scaffold-note">Nuvela, Scent&thinsp;/&thinsp;Worn, e.l.f. Beauty &mdash; coming next session</p>
     </div>
   </div>
 
-  <!-- DETAIL -->
-  <div id="page-detail" class="page">
-    <div id="pf-detail-inner" class="pf-detail-inner"></div>
+<!-- ━━━━ SCAFFOLD: BRAND IDENTITY ━━━━ -->
+  <div id="page-brand-identity" class="page">
+    <div class="scaffold wrap">
+      <p class="u-label scaffold-label">Brand Identity</p>
+      <h2 class="scaffold-title">Selected Identity Work</h2>
+      <p class="scaffold-note">Coming next session</p>
+    </div>
   </div>
 
-  <!-- ABOUT -->
+  <!-- ━━━━ SCAFFOLD: ABOUT ━━━━ -->
   <div id="page-about" class="page">
-    <div class="about-diptych">
-      <div class="about-col">
-        <img class="about-diptych-img" src="about-portrait.JPG" alt="Daeun Choi" />
-        <div class="about-bio-col">
-          <p>Hello! I'm Daeun, I'm an economics and art history student with a fine arts background, and a self-taught AI creative based in Los Angeles.</p>
-          <p>I specialize in crafting visual ad content, from concept to finished product, and my mix of training means I think about aesthetics and consumer behavior at the same time.</p>
-          <p>I care a lot about making things that are both beautiful and effective. If that sounds like what you need, let's talk :)</p>
+    <div class="scaffold wrap">
+      <p class="u-label scaffold-label">About</p>
+      <h2 class="scaffold-title">Onul Creative Studio</h2>
+      <p class="scaffold-note">Bio, methodology, r&eacute;sum&eacute; — coming next session</p>
+    </div>
+  </div>
+
+  <!-- ━━━━ SCAFFOLD: CONTACT ━━━━ -->
+  <div id="page-contact" class="page">
+    <div class="scaffold wrap">
+      <p class="u-label scaffold-label">Contact</p>
+      <h2 class="scaffold-title">Get in Touch</h2>
+      <p class="scaffold-note">Contact form — coming next session</p>
+    </div>
+  </div>
+
+  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       NUVELA CASE STUDY
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
+  <div id="page-nuvela" class="page">
+
+    <!-- Top nav -->
+    <nav class="nv-topnav">
+      <span class="nv-topnav-back" onclick="showPage('home')">&larr; Portfolio</span>
+      <span class="nv-topnav-center">Nuvela — Skincare Brand Concept</span>
+      <span class="nv-topnav-year">2026</span>
+    </nav>
+
+    <!-- Hero -->
+    <section class="nv-hero" id="nv-hero">
+      <div class="nv-hero-left">
+        <div>
+          <div class="nv-hero-label">02 &nbsp;·&nbsp; Skincare Brand Concept</div>
+          <div class="nv-title">NUVELA</div>
+          <div class="nv-tagline">Infrastructure for Healthy Skin.</div>
+          <p class="nv-desc">A speculative skincare brand system built on the language of construction — where repair, hydration, and resilience become architectural acts. Every product name maps to a building process; every visual element references material and method.</p>
         </div>
       </div>
-      <div class="about-col">
-        <img class="about-diptych-img" src="about-flower.png" alt="flower arrangement" />
-        <div class="about-name-col">Daeun Choi</div>
+      <div class="nv-hero-right">
+        <img src="Nuvelaad1_replacement.png" alt="Nuvela Campaign" />
+      </div>
+    </section>
+
+    <!-- Meta strip -->
+    <div class="nv-meta-strip">
+      <div class="nv-meta-cell">
+        <div class="nv-meta-label">Role</div>
+        <div class="nv-meta-val">Creative Direction &nbsp;/&nbsp; Brand Identity &nbsp;/&nbsp; Art Direction</div>
+      </div>
+      <div class="nv-meta-cell">
+        <div class="nv-meta-label">Year</div>
+        <div class="nv-meta-val">2026</div>
+      </div>
+      <div class="nv-meta-cell">
+        <div class="nv-meta-label">Type</div>
+        <div class="nv-meta-val">Speculative Brand System</div>
       </div>
     </div>
-  </div>
 
-  <!-- CONTACT -->
-  <div id="page-contact" class="page">
-    <div class="contact-inner">
-      <h2>Contact</h2>
-      <p class="contact-email">
-        <a href="mailto:daeundaeun223@gmail.com">daeundaeun223@gmail.com</a>
-      </p>
-      <form class="contact-form" onsubmit="submitContact(event)">
-        <div class="cf-row"><input type="text" placeholder="Name" required /></div>
-        <div class="cf-row"><input type="email" placeholder="Email" required /></div>
-        <div class="cf-row"><input type="text" placeholder="Subject" /></div>
-        <div class="cf-row"><textarea placeholder="Message"></textarea></div>
-        <button type="submit" class="cf-submit">Send</button>
-      </form>
-      <p id="cf-confirm" style="display:none; margin-top:1.5rem; font-size:13px; color:#888; font-family:var(--sans);">
-        Thanks — I'll be in touch.
-      </p>
-    </div>
-  </div>
+    <!-- Brand Philosophy -->
+    <section class="nv-philosophy" id="nv-philosophy">
+      <p class="nv-philosophy-quote">"Skin is infrastructure. Every layer is a surface to be maintained, repaired, and reinforced."</p>
+    </section>
 
-  <!-- PROCESS -->
-  <div id="page-process" class="page">
-    <div class="process-hscroll-track">
-      <div class="process-hscroll-inner" id="process-grid"></div>
+    <!-- Color + Typography -->
+    <section class="nv-system" id="nv-color">
+      <div class="nv-system-col">
+        <div class="nv-sec-label">Color Palette</div>
+        <div class="nv-swatches">
+          <div class="nv-swatch-item">
+            <div class="nv-swatch" style="background:#E7E2D6;"></div>
+            <div class="nv-swatch-name">Plaster</div>
+            <div class="nv-swatch-hex">#E7E2D6</div>
+          </div>
+          <div class="nv-swatch-item">
+            <div class="nv-swatch" style="background:#D6C8B2;"></div>
+            <div class="nv-swatch-name">Sand</div>
+            <div class="nv-swatch-hex">#D6C8B2</div>
+          </div>
+          <div class="nv-swatch-item">
+            <div class="nv-swatch" style="background:#BBADA0;"></div>
+            <div class="nv-swatch-name">Mortar</div>
+            <div class="nv-swatch-hex">#BBADA0</div>
+          </div>
+          <div class="nv-swatch-item">
+            <div class="nv-swatch" style="background:#8F9198;"></div>
+            <div class="nv-swatch-name">Slate</div>
+            <div class="nv-swatch-hex">#8F9198</div>
+          </div>
+          <div class="nv-swatch-item">
+            <div class="nv-swatch" style="background:#4A4D4F;"></div>
+            <div class="nv-swatch-name">Rebar</div>
+            <div class="nv-swatch-hex">#4A4D4F</div>
+          </div>
+        </div>
+      </div>
+      <div class="nv-system-col">
+        <div class="nv-sec-label">Typography</div>
+        <div class="nv-type-samples">
+          <div class="nv-type-sample">
+            <div class="nv-type-big nv-type-raleway">Ag</div>
+            <div class="nv-type-name">Raleway</div>
+            <div class="nv-type-role">Wordmark / Display</div>
+            <div class="nv-type-abc nv-type-raleway">ABCDEFGHIJKLM<br>abcdefghijklm<br>0123456789</div>
+          </div>
+          <div class="nv-type-sample">
+            <div class="nv-type-big nv-type-termes">Ag</div>
+            <div class="nv-type-name">Tex Gyre Termes</div>
+            <div class="nv-type-role">Editorial / Body</div>
+            <div class="nv-type-abc nv-type-termes">ABCDEFGHIJKLM<br>abcdefghijklm<br>0123456789</div>
+          </div>
+          <div class="nv-type-sample">
+            <div class="nv-type-big nv-type-avenir">Ag</div>
+            <div class="nv-type-name">Avenir Next Rounded</div>
+            <div class="nv-type-role">UI / Packaging</div>
+            <div class="nv-type-abc nv-type-avenir">ABCDEFGHIJKLM<br>abcdefghijklm<br>0123456789</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logo System -->
+    <section class="nv-logo-section" id="nv-logo">
+      <div>
+        <div class="nv-sec-label">Logo System</div>
+        <p class="nv-logo-desc">A plant growing through a structured frame — growth as infrastructure, nature as process.</p>
+      </div>
+      <div>
+        <img src="nuvela logo.png" alt="Nuvela Logo" class="nv-logo-img" />
+      </div>
+    </section>
+
+    <!-- Product Collection -->
+    <section class="nv-products" id="nv-products">
+      <div class="nv-sec-label">Product Collection</div>
+      <div class="nv-product-names">
+        <div class="nv-product-item">
+          <div class="nv-product-name">Balancing Essence</div>
+          <div class="nv-product-sub">Anti-Aging</div>
+          <div class="nv-product-img">
+            <img src="Nuvela Anti-aging Cream.png" alt="Nuvela Balancing Essence" loading="lazy" />
+          </div>
+        </div>
+        <div class="nv-product-item">
+          <div class="nv-product-name">Face Oil</div>
+          <div class="nv-product-sub">Sculpt</div>
+          <div class="nv-product-img">
+            <img src="Nuvela face oil.png" alt="Nuvela Face Oil" loading="lazy" />
+          </div>
+        </div>
+        <div class="nv-product-item">
+          <div class="nv-product-name">Hydrating Mist</div>
+          <div class="nv-product-sub">Irrigation</div>
+          <div class="nv-product-img">
+            <img src="Nuvela hydrating mist.png" alt="Nuvela Hydrating Mist" loading="lazy" />
+          </div>
+        </div>
+        <div class="nv-product-item">
+          <div class="nv-product-name">Brightening Serum</div>
+          <div class="nv-product-sub">Mixer</div>
+          <div class="nv-product-img">
+            <img src="Brightening serum.png" alt="Nuvela Brightening Serum" loading="lazy" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Campaign -->
+    <section class="nv-campaign" id="nv-campaign">
+      <div class="nv-sec-label">Campaign</div>
+      <div class="nv-campaign-grid">
+        <div class="nv-campaign-img">
+          <img src="Nuvelaad1_replacement.png" alt="Nuvela Campaign 01" loading="lazy" />
+        </div>
+        <div class="nv-campaign-img">
+          <img src="NuvelaAd2.png" alt="Nuvela Campaign 02" loading="lazy" />
+        </div>
+        <div class="nv-campaign-img">
+          <img src="NuvelaAd3.png" alt="Nuvela Campaign 03" loading="lazy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Page footer -->
+    <div class="nv-footer">
+      <span class="nv-footer-link" onclick="showPage('home')">&larr; Back to Portfolio</span>
+      <span class="nv-footer-copy">&copy; 2026 Onul Creative</span>
+      <span class="nv-footer-link" onclick="showPage('contact')">Contact</span>
     </div>
+
+  </div><!-- /page-nuvela -->
+
+  <!-- ━━━━ GENTLE MONSTER CASE STUDY ━━━━ -->
+  <div id="page-gm" class="page">
+
+    <!-- Hero + intro wrapper: hero sticks, card scrolls up over it, then both exit together -->
+    <div class="gm-hero-wrapper">
+
+    <section class="gm-hero">
+      <img src="GMhero.png" alt="Gentle Monster — Aftermath" />
+      <span class="gm-hero-back" onclick="showPage('home')">&larr; Portfolio</span>
+    </section>
+
+    <!-- Intro -->
+    <section class="gm-intro">
+      <div>
+        <div class="gm-title">AFTERMATH</div>
+      </div>
+      <div class="gm-intro-right">
+        <div class="gm-intro-sub">Gentle Monster — Aftermath &nbsp;·&nbsp; A non-commercial portfolio project</div>
+        <p class="gm-desc">Founded in 2011, Gentle Monster set out with a singular, uncompromising goal: the perfect pair of frames. The South Korean label has built its identity at the intersection of art, cultural reinvention, and technical innovation — treating eyewear not as artwork. This positions the brand at the forefront of contemporary eyewear design. AFTERMATH extends that philosophy to nature's own world. I wanted to capture this sentiment when designing eyewear through the transitional forms of seasonal decay: the vein structure of a maple samara, the translucent skeleton of a lunaria pod, the dormant stillness of a chrysalis. AFTERMATH asks for a re-evaluation of what Gentle, Monster, truly means.</p>
+        <div class="gm-meta">
+          <div class="gm-meta-row">
+            <span class="gm-meta-label">Role</span>
+            <span class="gm-meta-val">Creative Direction &nbsp;/&nbsp; Art Direction &nbsp;/&nbsp; Campaign Design</span>
+          </div>
+          <div class="gm-meta-row">
+            <span class="gm-meta-label">Year</span>
+            <span class="gm-meta-val">2026</span>
+          </div>
+          <div class="gm-meta-row">
+            <span class="gm-meta-label">Type</span>
+            <span class="gm-meta-val">Speculative Campaign</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    </div><!-- /gm-hero-wrapper -->
+
+    <!-- gmproduct: full-screen, no card treatment -->
+    <div class="gm-fullscreen-img">
+      <img src="gmproduct.png" alt="" loading="lazy" />
+    </div>
+
+    <!-- Horizontal scroll gallery -->
+    <div class="gm-hscroll-wrapper" id="gm-hscroll-wrapper">
+      <div class="gm-hscroll-sticky">
+        <div class="gm-hscroll-track" id="gm-hscroll-track">
+
+          <!-- Screen 1: face close-up + human bug legs -->
+          <div class="gm-hscreen">
+            <div class="gm-card"><img src="gmc1.png" alt="" loading="lazy" /></div>
+            <div class="gm-card"><img src="gmc5.png" alt="" loading="lazy" /></div>
+          </div>
+
+          <!-- Screen 2: GM text campaign solo -->
+          <div class="gm-hscreen">
+            <div class="gm-card"><img src="gmc4.png" alt="" loading="lazy" /></div>
+          </div>
+
+          <!-- Screen 3: gmc2 + furry coat -->
+          <div class="gm-hscreen">
+            <div class="gm-card"><img src="gmc2.png" alt="" loading="lazy" /></div>
+            <div class="gm-card"><img src="gmc4.2.png" alt="" loading="lazy" /></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+
   </div>
 
   <script>
-    const allPages = ['splash', 'work', 'detail', 'about', 'contact', 'process'];
+    const allPages = ['home','work','brand-identity','about','contact','nuvela','gm'];
 
     function showPage(name) {
+      const scrollToWork = name === 'work';
+      if (scrollToWork) name = 'home';
       allPages.forEach(id => {
         const el = document.getElementById('page-' + id);
         if (el) el.classList.toggle('active', id === name);
       });
-      const logo = document.getElementById('portfolio-logo');
-      logo.classList.toggle('white', name === 'work' || name === 'process');
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
+      document.body.classList.toggle('on-nuvela', name === 'nuvela');
+      document.body.classList.toggle('on-gm', name === 'gm');
+      document.body.classList.toggle('on-home', name === 'home');
+      if (scrollToWork) {
+        requestAnimationFrame(() => {
+          const gallery = document.getElementById('pm-work-scroll');
+          if (gallery) gallery.scrollIntoView({ behavior: 'smooth' });
+        });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }
+      if (name === 'nuvela') initNuvelaNav();
     }
 
-    // ── PORTFOLIO ITEMS ──
-    const portfolioItems = [
-      {
-        id: 'nuvela',
-        title: 'Nuvela',
-        subtitle: 'Advertisement',
-        category: 'Advertisement',
-        year: '2025',
-        tagline: 'A print campaign positioning everyday skincare as serious, structural work.',
-        projectType: 'Concept Campaign',
-        deliverables: 'Print Advertising · Art Direction',
-        images: [
-          { src: 'NuvelaAd1.png', caption: 'Nuvela Balancing Essence — paving the way to better skin' },
-          { src: 'NuvelaAd2.png', caption: 'Nuvela Brightening Serum — a solid foundation for radiant skin' },
-        ],
-        footnote: 'The campaign borrows the visual language of construction — road rollers, cement mixers, heavy machinery — and places Nuvela products at the centre of each machine. The conceit is simple: good skin is built, not found. Each execution carries its own tagline, but they share the same logic: that the ingredients inside a bottle are as serious as any industrial process.',
-      },
-    ];
+    // Set on-home on initial load
+    document.body.classList.add('on-home');
 
-    function buildWorkList() {
-      const list = document.getElementById('pw-list');
-      if (!list) return;
-      list.innerHTML = portfolioItems.map((item, i) => `
-        <div class="pw-item" onclick="showDetail('${item.id}')">
-          <div class="pw-item-meta">
-            <div class="pw-item-index">0${i + 1}</div>
-            <div class="pw-item-title">${item.title}</div>
-            <div class="pw-item-subtitle">${item.subtitle}</div>
-            <hr class="pw-item-rule" />
-            <div class="pw-item-desc">${item.tagline}</div>
-            <div class="pw-item-cta">View Project &nbsp;&#8594;</div>
-          </div>
-          <div class="pw-item-img">
-            <img src="${item.images[0].src}" alt="${item.title}" />
-          </div>
-        </div>
-      `).join('');
+    // GM horizontal scroll gallery
+    function gmHscroll() {
+      const wrapper = document.getElementById('gm-hscroll-wrapper');
+      const track   = document.getElementById('gm-hscroll-track');
+      if (!wrapper || !track || !document.body.classList.contains('on-gm')) return;
+      const scrolled   = Math.max(0, window.scrollY - wrapper.offsetTop);
+      const scrollable = wrapper.offsetHeight - window.innerHeight;
+      const progress   = Math.min(1, scrolled / scrollable);
+      const maxMove    = -(track.scrollWidth - window.innerWidth);
+      track.style.transform = `translateX(${progress * maxMove}px)`;
+    }
+    window.addEventListener('scroll', gmHscroll, { passive: true });
+
+
+
+    function initNuvelaNav() {
+      const items = document.querySelectorAll('#nv-nav .nv-sb-item');
+
+      // click: scroll to section
+      items.forEach(item => {
+        item.addEventListener('click', () => {
+          const id = item.dataset.section;
+          const target = document.getElementById(id);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      // scroll-sync: highlight active section
+      const sectionIds = ['nv-hero','nv-philosophy','nv-visual','nv-color','nv-logo','nv-products','nv-campaign'];
+      const setActive = (id) => {
+        items.forEach(item => item.classList.toggle('active', item.dataset.section === id));
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      }, { root: null, rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+      sectionIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) observer.observe(el);
+      });
     }
 
-    function showDetail(id) {
-      const item = portfolioItems.find(x => x.id === id);
-      if (!item) return;
-      document.getElementById('pf-detail-inner').innerHTML = `
-        <div class="pf-detail-header">
-          <div class="pf-detail-eyebrow">${item.category} &mdash; ${item.year}</div>
-          <div class="pf-detail-title">${item.title}</div>
-          <div class="pf-detail-tagline">${item.tagline}</div>
-        </div>
-        ${item.images.map(img => `
-          <img class="pf-detail-image" src="${img.src}" alt="${item.title}" onclick="openLightbox(this.src)" style="cursor:zoom-in;" />
-          <div class="pf-detail-caption">${img.caption}</div>
-        `).join('')}
-        <div>
-          <hr class="pf-detail-rule" />
-          <p class="pf-detail-footnote">${item.footnote}</p>
-        </div>`;
-      showPage('detail');
-    }
+    // ─── Horizontal scroll work gallery ───
+    (function () {
+      let raf = null;
+      let listening = false;
 
-    // ── PROCESS (reuses projects data style) ──
-    const processProjects = [
-      { id: 'p-1', title: 'Muge', thumb: 'project1-cover.jpg' },
-      { id: 'p-2', title: 'Project Two', thumb: '' },
-    ];
+      function update() {
+        const wrapper = document.getElementById('pm-work-scroll');
+        const track   = document.getElementById('pm-work-track');
+        if (!wrapper || !track) return;
 
-    function renderProcess() {
-      document.getElementById('process-grid').innerHTML = processProjects.map(p => `
-        <div class="project-card">
-          ${p.thumb
-            ? `<img class="project-card-img" src="${p.thumb}" alt="${p.title}" loading="lazy" />`
-            : `<div class="project-card-bg"><span class="project-card-bg-text">Add image</span></div>`}
-          <div class="project-card-label">${p.title}</div>
-        </div>
-      `).join('');
+        const scrollY  = window.scrollY;
+        const wrapTop  = wrapper.offsetTop;
+        const scrollable = wrapper.offsetHeight - window.innerHeight;
+        const progress = Math.max(0, Math.min(1, (scrollY - wrapTop) / scrollable));
+        const maxShift = track.scrollWidth - window.innerWidth;
+        track.style.transform = `translateX(${-progress * maxShift}px)`;
+        const inGallery = scrollY >= wrapTop && scrollY < wrapTop + scrollable;
+        document.body.classList.toggle('gallery-active', inGallery);
+      }
 
-      const inner = document.getElementById('process-grid');
-      inner.addEventListener('wheel', e => {
-        e.preventDefault();
-        inner.scrollLeft += (e.deltaY + e.deltaX) * 25;
-      }, { passive: false });
-    }
+      function initHScroll() {
+        if (!listening) {
+          window.addEventListener('scroll', () => {
+            if (raf) return;
+            raf = requestAnimationFrame(() => { raf = null; update(); });
+          }, { passive: true });
+          listening = true;
+        }
+        update();
+      }
 
-    function openLightbox(src) {
-      document.getElementById('lightbox-img').src = src;
-      document.getElementById('lightbox').classList.add('open');
-    }
-    function closeLightbox() {
-      document.getElementById('lightbox').classList.remove('open');
-    }
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+      const origShowPage = window.showPage;
+      window.showPage = function (name) {
+        origShowPage(name);
+        if (name === 'home') requestAnimationFrame(initHScroll);
+      };
 
-    function submitContact(e) {
-      e.preventDefault();
-      e.target.style.display = 'none';
-      document.getElementById('cf-confirm').style.display = 'block';
-    }
-
-    buildWorkList();
-    renderProcess();
+      if (document.getElementById('page-home')?.classList.contains('active')) {
+        initHScroll();
+      }
+    })();
   </script>
 </body>
 </html>
