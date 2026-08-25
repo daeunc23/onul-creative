@@ -89,11 +89,11 @@
     body.gallery-active .nav-logo { filter: brightness(0) invert(1); }
     .site-nav-inner {
       width: 100%;
-      padding: 0 3rem;
+      padding: 0 3rem 0 0.5rem;
       box-sizing: border-box;
-      height: 7rem;
+      height: 8rem;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
     }
     .nav-left {
@@ -119,13 +119,14 @@
       align-items: center;
       justify-content: flex-end;
       gap: 2.5rem;
+      height: 8rem;
     }
     .nav-logo {
-      height: 7rem; width: auto; display: block;
+      height: 8rem; width: auto; display: block;
       cursor: pointer;
       filter: brightness(0);
       transition: filter 0.3s, opacity 0.2s;
-      margin-top: -0.5rem;
+      margin-top: -1rem;
     }
     .nav-logo:hover { opacity: 0.65; }
     .nav-link {
@@ -1247,7 +1248,7 @@
     .pm-about-logo {
       position: absolute;
       top: -1rem;
-      left: -0.5rem;
+      left: 0.5rem;
       z-index: 10;
       height: 8rem;
       width: auto;
@@ -1418,6 +1419,65 @@
       .pm-about-inner { grid-template-columns: 1fr; gap: 2.5rem; }
       .pm-about { padding: 4rem 2rem; }
       .pm-panel { width: 90vw; }
+    }
+
+    /* ─── Tumble Ad ─── */
+    #page-tumble.active { display: block !important; }
+    body.on-tumble .site-nav { display: none; }
+    .tumble-hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      background: #000;
+      overflow: hidden;
+    }
+    .tumble-hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .tumble-back {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      font-family: 'Cormorant SC', serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.6);
+      cursor: pointer;
+      z-index: 10;
+      transition: color 0.2s;
+    }
+    .tumble-back:hover { color: #fff; }
+    .tumble-info {
+      background: #111009;
+      padding: 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .tumble-title {
+      font-family: 'Chakra Petch', sans-serif;
+      font-weight: 300;
+      letter-spacing: 0.28em;
+      font-size: clamp(2rem, 4vw, 4rem);
+      color: #fff;
+      text-transform: uppercase;
+    }
+    .tumble-meta-row {
+      display: flex;
+      gap: 2rem;
+      font-family: 'Courier Prime', monospace;
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.6);
+    }
+    .tumble-meta-label {
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.35);
+      min-width: 6rem;
     }
 
     /* ─── Gentle Monster Case Study ─── */
@@ -1646,6 +1706,13 @@
           <div class="pm-panel" onclick="showPage('gm')">
             <div class="pm-panel-img">
               <img src="gmc2.png" alt="Gentle Monster Aftermath" loading="lazy" />
+            </div>
+          </div>
+
+          <!-- 02 Tumble Ad -->
+          <div class="pm-panel" onclick="showPage('tumble')">
+            <div class="pm-panel-img">
+              <video src="Tumble Ad.mp4" muted loop playsinline autoplay style="width:100%;height:100%;object-fit:cover;"></video>
             </div>
           </div>
 
@@ -1941,8 +2008,21 @@
 
   </div>
 
+  <!-- ━━━━ TUMBLE AD ━━━━ -->
+  <div id="page-tumble" class="page">
+    <div class="tumble-hero">
+      <video src="Tumble Ad.mp4" autoplay loop muted playsinline></video>
+      <span class="tumble-back" onclick="showPage('home')">&larr; Portfolio</span>
+    </div>
+    <div class="tumble-info">
+      <div class="tumble-title">TUMBLE AD</div>
+      <div class="tumble-meta-row"><span class="tumble-meta-label">Type</span><span class="tumble-meta-val">Video Advertisement</span></div>
+      <div class="tumble-meta-row"><span class="tumble-meta-label">Year</span><span class="tumble-meta-val">2026</span></div>
+    </div>
+  </div>
+
   <script>
-    const allPages = ['home','work','brand-identity','about','contact','nuvela','gm'];
+    const allPages = ['home','work','brand-identity','about','contact','nuvela','gm','tumble'];
 
     function showPage(name) {
       const scrollToWork = name === 'work';
@@ -1953,6 +2033,7 @@
       });
       document.body.classList.toggle('on-nuvela', name === 'nuvela');
       document.body.classList.toggle('on-gm', name === 'gm');
+      document.body.classList.toggle('on-tumble', name === 'tumble');
       document.body.classList.toggle('on-home', name === 'home');
       if (scrollToWork) {
         requestAnimationFrame(() => {
