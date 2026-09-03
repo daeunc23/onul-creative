@@ -1908,6 +1908,211 @@
       font-family: var(--body); font-size: 0.58rem;
       color: rgba(255,255,255,0.25); letter-spacing: 0.06em;
     }
+
+    /* ══════════════════════════════════════
+       MOBILE  (touch devices / ≤ 768px)
+       ══════════════════════════════════════ */
+    @media (max-width: 768px), (hover: none) and (pointer: coarse) {
+
+      /* ── Landing page ── */
+      .pm-about-name {
+        left: 50%;
+        top: 38%;
+        transform: translate(-50%, -50%);
+        align-items: center;
+      }
+      .pm-about-logo-inline {
+        height: clamp(7rem, 40vw, 12rem);
+      }
+      .pm-about-nav {
+        right: 50%;
+        top: auto;
+        bottom: 2.5rem;
+        transform: translateX(50%);
+        flex-direction: row;
+        gap: 2rem;
+        align-items: center;
+      }
+      .pm-about-nav a {
+        height: auto;
+        font-size: clamp(0.8rem, 3.5vw, 1rem);
+      }
+
+      /* ── Work gallery (horizontal scroll → vertical stack) ── */
+      .pm-work-scroll {
+        height: auto !important;
+        overflow: visible;
+      }
+      .pm-work-sticky {
+        position: static !important;
+        height: auto !important;
+        flex-direction: column;
+        padding: 1.5rem 1rem;
+        gap: 1rem;
+        overflow: visible;
+        background: #000;
+      }
+      .pm-work-track {
+        flex-direction: column;
+        transform: none !important;
+        gap: 1rem;
+        padding-right: 0;
+        width: 100%;
+        height: auto;
+      }
+      .pm-panel {
+        width: 100% !important;
+        height: 70vw;
+        flex-shrink: unset;
+      }
+      .pm-panel-img, .pm-panel-img img, .pm-panel-img video {
+        border-radius: 8px;
+      }
+
+      /* ── Site nav ── */
+      .site-nav {
+        padding: 1rem 1.2rem;
+      }
+      .nav-link {
+        font-size: clamp(0.75rem, 3vw, 0.9rem);
+      }
+
+      /* ── Back button ── */
+      .back-btn {
+        top: 1.2rem;
+        left: 1.2rem;
+        font-size: 0.7rem;
+      }
+
+      /* ── Spec card ── */
+      .spec-card {
+        padding: 2rem 1.5rem 2.5rem;
+      }
+      .spec-title-row {
+        margin-bottom: 0.5rem;
+      }
+      .spec-meta-row {
+        flex-direction: column;
+        gap: 1.2rem;
+        justify-content: flex-start;
+      }
+      .spec-title {
+        font-size: clamp(1.6rem, 8vw, 2.4rem);
+      }
+      .spec-title--script {
+        font-size: clamp(1.8rem, 9vw, 3rem);
+      }
+      .spec-val {
+        font-size: 0.95rem;
+      }
+
+      /* ── Video pages (Blend, Rubbrband, Tumble) ── */
+      .tumble-hero {
+        height: 56vw;
+        min-height: 260px;
+      }
+      .tumble-info {
+        padding: 2.5rem 1.5rem;
+      }
+
+      /* ── ROE ── */
+      .roe-hero img {
+        height: 60vw;
+        min-height: 240px;
+      }
+      .roe-grid {
+        flex-direction: column;
+      }
+      .roe-pair {
+        flex-direction: column;
+      }
+      .roe-pair img, .roe-full img {
+        width: 100%;
+        height: auto;
+      }
+
+      /* ── GM hero ── */
+      .gm-hero {
+        height: 60vw;
+        min-height: 260px;
+        position: relative;
+      }
+      .gm-intro {
+        padding: 2rem 1.2rem;
+        margin: 2rem 0.8rem;
+      }
+      .gm-title {
+        font-size: clamp(2rem, 10vw, 3.5rem);
+      }
+      .gm-desc {
+        font-size: 1.1rem;
+      }
+      .gm-portrait img {
+        width: 70%;
+      }
+      .gm-two-col {
+        grid-template-columns: 1fr;
+      }
+      .gm-full-img {
+        margin: 0;
+      }
+
+      /* GM horizontal scroll → vertical on mobile */
+      .gm-hscroll-wrapper {
+        height: auto !important;
+        background: #111009;
+      }
+      .gm-hscroll-sticky {
+        position: static !important;
+        height: auto !important;
+        overflow: visible;
+      }
+      .gm-hscroll-track {
+        flex-direction: column;
+        transform: none !important;
+        height: auto;
+      }
+      .gm-hscreen {
+        width: 100% !important;
+        height: auto;
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+      }
+      .gm-card {
+        width: 100% !important;
+        height: 70vw !important;
+      }
+
+      /* ── Contact ── */
+      .contact-wrap {
+        flex-direction: column;
+      }
+      .contact-content {
+        padding: 6rem 1.5rem 3rem;
+      }
+      .contact-title {
+        font-size: clamp(2.5rem, 12vw, 4rem);
+      }
+      .contact-form {
+        width: 100%;
+      }
+      .contact-bg {
+        opacity: 0.3;
+      }
+
+      /* Page logo smaller on mobile */
+      .page-logo {
+        height: 5.5rem;
+        top: -0.5rem;
+        left: 0.2rem;
+      }
+
+      /* Keep cover images visible on touch (no hover to reveal video) */
+      .blend-card-cover,
+      .rubbrband-card-cover,
+      .tumble-card-cover { opacity: 1 !important; }
+    }
   </style>
 </head>
 <body>
@@ -2397,8 +2602,26 @@
     // Set on-home on initial load
     document.body.classList.add('on-home');
 
+    const isMobile = () => window.innerWidth <= 768 || window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+
+    // Work gallery horizontal scroll
+    function pmHscroll() {
+      if (isMobile()) return;
+      const sticky = document.getElementById('pm-work-sticky');
+      const track  = document.getElementById('pm-work-track');
+      const scroll = document.getElementById('pm-work-scroll');
+      if (!sticky || !track || !scroll) return;
+      const scrolled   = Math.max(0, window.scrollY - scroll.offsetTop);
+      const scrollable = scroll.offsetHeight - window.innerHeight;
+      const progress   = scrollable > 0 ? Math.min(1, scrolled / scrollable) : 0;
+      const maxShift   = track.scrollWidth + track.offsetLeft - window.innerWidth;
+      track.style.transform = `translateX(${-progress * maxShift}px)`;
+    }
+    window.addEventListener('scroll', pmHscroll, { passive: true });
+
     // GM horizontal scroll gallery
     function gmHscroll() {
+      if (isMobile()) { document.getElementById('gm-hscroll-track').style.transform = ''; return; }
       const wrapper = document.getElementById('gm-hscroll-wrapper');
       const track   = document.getElementById('gm-hscroll-track');
       if (!wrapper || !track || !document.body.classList.contains('on-gm')) return;
