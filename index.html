@@ -1999,7 +1999,6 @@
     <div class="scaffold wrap">
       <p class="u-label scaffold-label">Work</p>
       <h2 class="scaffold-title">Case Studies</h2>
-      <p class="scaffold-note">Nuvela, Scent&thinsp;/&thinsp;Worn, e.l.f. Beauty &mdash; coming next session</p>
     </div>
   </div>
 
@@ -2040,10 +2039,8 @@
     </div>
   </div>
 
-  <!-- ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-       NUVELA CASE STUDY
-  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━ -->
-  <div id="page-nuvela" class="page">
+  <!-- NUVELA REMOVED -->
+  <div id="page-nuvela" class="page" style="display:none!important;">
 
     <!-- Top nav -->
     <nav class="nv-topnav">
@@ -2349,7 +2346,7 @@
   </button>
 
   <script>
-    const allPages = ['home','work','brand-identity','about','contact','nuvela','gm','tumble','roe','blend','rubbrband'];
+    const allPages = ['home','work','brand-identity','about','contact','gm','tumble','roe','blend','rubbrband'];
 
     function showPage(name) {
       const scrollToWork = name === 'work';
@@ -2358,7 +2355,6 @@
         const el = document.getElementById('page-' + id);
         if (el) el.classList.toggle('active', id === name);
       });
-      document.body.classList.toggle('on-nuvela', name === 'nuvela');
       document.body.classList.toggle('on-gm', name === 'gm');
       document.body.classList.toggle('on-tumble', name === 'tumble');
       document.body.classList.toggle('on-blend', name === 'blend');
