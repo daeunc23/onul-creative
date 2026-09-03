@@ -6,7 +6,7 @@
   <title>Onul Creative Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&family=Raleway:wght@100;200&family=Chakra+Petch:wght@300;400;500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;1,6..96,300;1,6..96,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,200;0,9..144,300;1,9..144,100;1,9..144,200&family=Italiana&family=Cinzel:wght@300;400&family=Gilda+Display&family=Cormorant+SC:wght@300;400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&family=Raleway:wght@100;200&family=Chakra+Petch:wght@300;400;500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;1,6..96,300;1,6..96,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,200;0,9..144,300;1,9..144,100;1,9..144,200&family=Italiana&family=Cinzel:wght@300;400&family=Gilda+Display&family=Cormorant+SC:wght@300;400&family=Great+Vibes&display=swap" rel="stylesheet" />
   <style>
     @font-face {
       font-family: 'TeX Gyre Termes';
@@ -80,9 +80,9 @@
     }
     body.on-nuvela .site-nav { display: none; }
     body.on-gm .site-nav { display: none; }
-    body.on-home:not(.gallery-active) .nav-left,
-    body.on-home:not(.gallery-active) .nav-right,
-    body.on-home:not(.gallery-active) .nav-logo { visibility: hidden; }
+    body.on-home .nav-left,
+    body.on-home .nav-right,
+    body.on-home .nav-logo { visibility: hidden; }
     body.gallery-active .site-nav { background: transparent; border-bottom: none; }
     body.gallery-active .nav-link { color: rgba(255,255,255,0.75); }
     body.gallery-active .nav-link:hover { color: #fff; }
@@ -131,7 +131,7 @@
     .nav-logo:hover { opacity: 0.65; }
     .nav-link {
       font-family: 'Cormorant SC', serif;
-      font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+      font-size: clamp(0.85rem, 1.4vw, 1.2rem);
       font-weight: 300;
       font-synthesis: none;
       letter-spacing: 0.12em;
@@ -486,6 +486,94 @@
       color: var(--muted);
       letter-spacing: 0.1em;
     }
+    body.on-contact .site-nav { display: none; }
+    .contact-wrap {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      background: #0d0d0d;
+      overflow: hidden;
+    }
+    .contact-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.18;
+      display: block;
+    }
+    .contact-content {
+      position: relative;
+      z-index: 2;
+      padding: 8rem 3.5rem 5rem;
+      max-width: 760px;
+    }
+    .contact-title {
+      font-family: 'Cormorant SC', serif;
+      font-size: clamp(2rem, 3.8vw, 4.5rem);
+      color: #F4F1EC;
+      font-weight: 300;
+      font-synthesis: none;
+      letter-spacing: 0.12em;
+      line-height: 1;
+      margin: 0 0 2.5rem;
+      padding: 0;
+      text-indent: 0;
+    }
+    .contact-email {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.75);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      margin-bottom: 3rem;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      width: 100%;
+    }
+    .contact-field {
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      padding: 1.1rem 0;
+    }
+    .contact-field input,
+    .contact-field textarea {
+      background: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      caret-color: #fff;
+      resize: none;
+    }
+    .contact-field input::placeholder,
+    .contact-field textarea::placeholder {
+      color: rgba(255,255,255,0.3);
+    }
+    .contact-submit {
+      margin-top: 2.5rem;
+      align-self: flex-start;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.7);
+      font-family: 'Cormorant SC', serif;
+      font-size: 0.85rem;
+      font-weight: 300;
+      letter-spacing: 0.14em;
+      padding: 0.75rem 2.5rem;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .contact-submit:hover { border-color: #fff; color: #fff; }
 
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        RESPONSIVE
@@ -1198,7 +1286,7 @@
     }
     .pm-about-name {
       position: absolute;
-      left: 2rem;
+      left: -1rem;
       top: 50%;
       transform: translateY(-50%);
       display: flex;
@@ -1244,6 +1332,50 @@
       transition: opacity 0.2s;
     }
     .pm-about-nav a:hover { opacity: 1; }
+    /* shared logo for GM + Tumble pages */
+    .page-logo {
+      position: fixed;
+      top: -1rem;
+      left: 0.5rem;
+      z-index: 100;
+      height: 8rem;
+      width: auto;
+      filter: brightness(0) invert(1) sepia(1) saturate(0.1) brightness(0.97);
+      opacity: 0.9;
+      cursor: pointer;
+    }
+    .back-btn {
+      position: fixed;
+      top: 2rem;
+      left: 2.5rem;
+      z-index: 200;
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      mix-blend-mode: difference;
+      color: #fff;
+      font-family: 'Cormorant SC', serif;
+      font-size: clamp(0.7rem, 1vw, 0.85rem);
+      font-weight: 300;
+      font-synthesis: none;
+      letter-spacing: 0.16em;
+      text-decoration: none;
+    }
+    .back-btn svg { width: 1.1em; height: 1.1em; flex-shrink: 0; }
+    body.on-gm .back-btn,
+    body.on-roe .back-btn { display: flex; }
+
+    .pm-about-logo-inline {
+      height: clamp(10rem, 18vw, 22rem);
+      width: auto;
+      filter: brightness(0) invert(1) sepia(1) saturate(0.1) brightness(0.97);
+      opacity: 0.9;
+      display: block;
+    }
     /* landing logo top-left */
     .pm-about-logo {
       position: absolute;
@@ -1330,7 +1462,7 @@
 
     /* ─── Home: Horizontal scroll work section ─── */
     .pm-work-scroll {
-      height: 400vh;
+      height: 220vh;
       position: relative;
     }
     .pm-work-sticky {
@@ -1340,7 +1472,7 @@
       overflow: hidden;
       display: flex;
       align-items: center;
-      padding: 8rem 3rem 2rem 3rem;
+      padding: 2rem 3rem 2rem 3rem;
       box-sizing: border-box;
       background: #000;
     }
@@ -1422,9 +1554,92 @@
       .pm-panel { width: 90vw; }
     }
 
+    /* ─── ROE ─── */
+    #page-roe.active { display: block !important; }
+    body.on-roe .site-nav { display: none; }
+    .roe-hero {
+      width: 100%;
+      background: #0d0d0d;
+    }
+    .roe-hero img {
+      display: block;
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+    .roe-grid {
+      background: #0d0d0d;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .roe-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .roe-pair img, .roe-full img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
     /* ─── Tumble Ad ─── */
     #page-tumble.active { display: block !important; }
     body.on-tumble .site-nav { display: none; }
+    body.on-blend .site-nav { display: none; }
+    body.on-rubbrband .site-nav { display: none; }
+
+    /* ─── Shared spec card ─── */
+    .spec-card {
+      background: #0d0c09;
+      padding: 2.5rem 4rem 3rem;
+      border-top: 1px solid rgba(244,241,236,0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 1.6rem;
+    }
+    .spec-title-row { display: flex; }
+    .spec-meta-row {
+      display: flex;
+      gap: 4rem;
+      align-items: flex-start;
+      justify-content: center;
+    }
+    .spec-block { display: flex; flex-direction: column; gap: 0.6rem; }
+    .spec-label {
+      font-family: 'Bodoni Moda', serif;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      color: rgba(244,241,236,0.55);
+      text-transform: uppercase;
+    }
+    .spec-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      color: rgba(244,241,236,0.88);
+      line-height: 1.5;
+    }
+    .spec-title {
+      font-family: 'Cormorant SC', serif;
+      font-size: clamp(1.5rem, 2.4vw, 2.4rem);
+      font-weight: 300;
+      font-synthesis: none;
+      letter-spacing: 0.14em;
+      color: #F4F1EC;
+      line-height: 1;
+    }
+    .spec-title--script {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 2.8vw, 3rem);
+      letter-spacing: 0.04em;
+      font-weight: 500;
+      font-style: italic;
+    }
     .tumble-hero {
       position: relative;
       width: 100%;
@@ -1491,6 +1706,26 @@
       pointer-events: none;
     }
     .tumble-card:hover .tumble-card-cover { opacity: 0; }
+    .blend-card-cover {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .blend-card:hover .blend-card-cover { opacity: 0; }
+    .rubbrband-card-cover {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+    .rubbrband-card:hover .rubbrband-card-cover { opacity: 0; }
 
     /* ─── Gentle Monster Case Study ─── */
     #page-gm.active { display: block !important; }
@@ -1517,10 +1752,10 @@
     /* intro */
     .gm-intro {
       background: #111009;
-      padding: 5rem;
+      padding: 3rem 4rem;
       display: flex;
       flex-direction: column;
-      gap: 3rem;
+      gap: 2rem;
       border-radius: 24px;
       margin: 10vh 1.5rem 10vh;
       position: relative;
@@ -1534,28 +1769,30 @@
       border-radius: 12px;
     }
     .gm-title {
-      font-family: 'Chakra Petch', sans-serif;
+      font-family: 'Cormorant SC', serif;
       font-weight: 300;
-      letter-spacing: 0.28em;
+      font-synthesis: none;
+      letter-spacing: 0.12em;
       font-size: clamp(2.8rem, 5.5vw, 5.5rem);
       color: #fff;
       line-height: 1;
-      text-transform: uppercase;
     }
     .gm-intro-right {
       display: flex; flex-direction: column; gap: 2rem;
     }
     .gm-intro-sub {
-      font-family: 'Courier Prime', monospace;
-      font-size: 0.7rem; letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.35);
-      text-transform: uppercase;
+      font-family: 'Cormorant SC', serif;
+      font-size: 0.95rem; letter-spacing: 0.12em;
+      color: #F4F1EC;
+      font-weight: 300;
+      font-synthesis: none;
       margin-bottom: 0.5rem;
     }
     .gm-desc {
-      font-family: 'Courier Prime', monospace;
-      font-size: 1rem; line-height: 1.85;
-      color: rgba(255,255,255,0.9);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; line-height: 1.85;
+      font-weight: 300;
+      color: rgba(255,255,255,0.8);
     }
     .gm-meta {
       display: flex; flex-direction: column; gap: 0.5rem;
@@ -1564,13 +1801,14 @@
     }
     .gm-meta-row { display: flex; gap: 1.5rem; }
     .gm-meta-label {
-      font-family: 'Courier Prime', monospace; font-size: 0.6rem; letter-spacing: 0.1em;
-      text-transform: uppercase; color: rgba(255,255,255,0.25);
+      font-family: 'Cormorant SC', serif; font-size: 0.65rem; letter-spacing: 0.14em;
+      font-weight: 300; color: rgba(255,255,255,0.25);
       min-width: 60px;
     }
     .gm-meta-val {
-      font-family: 'Courier Prime', monospace; font-size: 0.72rem;
-      color: rgba(255,255,255,0.5);
+      font-family: 'Cormorant Garamond', serif; font-size: 0.85rem;
+      font-weight: 300; color: rgba(255,255,255,0.5);
+      letter-spacing: 0.04em;
     }
 
     /* centered portrait image */
@@ -1696,11 +1934,8 @@
     <!-- ① About -->
     <section class="pm-about">
       <img class="pm-about-bg" src="landingfinal.png" alt="" />
-      <img src="onul-studio-logo_1.svg" alt="Onul Creative Studio" class="pm-about-logo" />
       <div class="pm-about-name">
-        <span>ONUL</span>
-        <span>CREATIVE</span>
-        <span>STUDIO</span>
+        <img src="onul-studio-logo_1.svg" alt="Onul Creative Studio" class="pm-about-logo-inline" />
       </div>
       <nav class="pm-about-nav">
         <a href="#" onclick="showPage('work');return false;">work</a>
@@ -1714,15 +1949,38 @@
       <div class="pm-work-sticky" id="pm-work-sticky">
         <div class="pm-work-track" id="pm-work-track">
 
-          <!-- 01 Gentle Monster -->
+          <!-- 01 The Perfect Blend -->
+          <div class="pm-panel blend-card" onclick="showPage('blend')">
+            <div class="pm-panel-img" style="position:relative;">
+              <video id="blend-card-vid" src="The perfect blend ad.mov" muted playsinline preload="auto" loop style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+              <img src="Cover.webp" alt="The Perfect Blend" class="blend-card-cover" />
+            </div>
+          </div>
+
+          <!-- 02 Rubbrband -->
+          <div class="pm-panel rubbrband-card" onclick="showPage('rubbrband')">
+            <div class="pm-panel-img" style="position:relative;">
+              <video id="rubbrband-card-vid" src="Rubbrband spec ad.mov" muted playsinline preload="auto" loop style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+              <img src="Rubbrband cover.jpg" alt="Rubbrband" class="rubbrband-card-cover" />
+            </div>
+          </div>
+
+          <!-- 03 ROE -->
+          <div class="pm-panel" onclick="showPage('roe')">
+            <div class="pm-panel-img">
+              <img src="ROE3.png" alt="ROE" loading="lazy" style="object-position: left center;" />
+            </div>
+          </div>
+
+          <!-- 03 Gentle Monster -->
           <div class="pm-panel" onclick="showPage('gm')">
             <div class="pm-panel-img">
               <img src="gmc2.png" alt="Gentle Monster Aftermath" loading="lazy" />
             </div>
           </div>
 
-          <!-- 02 Tumble Ad -->
-          <div class="pm-panel tumble-card" onclick="showPage('tumble')">
+          <!-- 03 Tumble Ad (hidden) -->
+          <div class="pm-panel tumble-card" onclick="showPage('tumble')" style="display:none;">
             <div class="pm-panel-img" style="position:relative;">
               <video id="tumble-card-vid" src="Tumble Ad.mp4" muted playsinline preload="auto" loop style="width:100%;height:100%;object-fit:cover;display:block;"></video>
               <img src="tumble card.png" alt="Tumble Ad" class="tumble-card-cover" />
@@ -1765,10 +2023,20 @@
 
   <!-- ━━━━ SCAFFOLD: CONTACT ━━━━ -->
   <div id="page-contact" class="page">
-    <div class="scaffold wrap">
-      <p class="u-label scaffold-label">Contact</p>
-      <h2 class="scaffold-title">Get in Touch</h2>
-      <p class="scaffold-note">Contact form — coming next session</p>
+    <div class="contact-wrap">
+      <img src="lilies-rotated.png" alt="" class="contact-bg" />
+      <img src="onul-studio-logo_1.svg" alt="Onul Creative Studio" class="page-logo" onclick="showPage('home')" />
+      <div class="contact-content">
+        <h1 class="contact-title">Contact</h1>
+        <a class="contact-email" href="mailto:onulstudio223@gmail.com">onulstudio223@gmail.com</a>
+        <form class="contact-form" onsubmit="return false;">
+          <div class="contact-field"><input type="text" placeholder="Name" /></div>
+          <div class="contact-field"><input type="email" placeholder="Email" /></div>
+          <div class="contact-field"><input type="text" placeholder="Subject" /></div>
+          <div class="contact-field"><textarea placeholder="Message" rows="4"></textarea></div>
+          <button class="contact-submit" type="submit">Send</button>
+        </form>
+      </div>
     </div>
   </div>
 
@@ -1956,33 +2224,9 @@
 
     <section class="gm-hero">
       <img src="GMhero.png" alt="Gentle Monster — Aftermath" />
-      <span class="gm-hero-back" onclick="showPage('home')">&larr; Portfolio</span>
     </section>
 
     <!-- Intro -->
-    <section class="gm-intro">
-      <div>
-        <div class="gm-title">AFTERMATH</div>
-      </div>
-      <div class="gm-intro-right">
-        <div class="gm-intro-sub">Gentle Monster — Aftermath &nbsp;·&nbsp; A non-commercial portfolio project</div>
-        <p class="gm-desc">Founded in 2011, Gentle Monster set out with a singular, uncompromising goal: the perfect pair of frames. The South Korean label has built its identity at the intersection of art, cultural reinvention, and technical innovation — treating eyewear not as artwork. This positions the brand at the forefront of contemporary eyewear design. AFTERMATH extends that philosophy to nature's own world. I wanted to capture this sentiment when designing eyewear through the transitional forms of seasonal decay: the vein structure of a maple samara, the translucent skeleton of a lunaria pod, the dormant stillness of a chrysalis. AFTERMATH asks for a re-evaluation of what Gentle, Monster, truly means.</p>
-        <div class="gm-meta">
-          <div class="gm-meta-row">
-            <span class="gm-meta-label">Role</span>
-            <span class="gm-meta-val">Creative Direction &nbsp;/&nbsp; Art Direction &nbsp;/&nbsp; Campaign Design</span>
-          </div>
-          <div class="gm-meta-row">
-            <span class="gm-meta-label">Year</span>
-            <span class="gm-meta-val">2026</span>
-          </div>
-          <div class="gm-meta-row">
-            <span class="gm-meta-label">Type</span>
-            <span class="gm-meta-val">Speculative Campaign</span>
-          </div>
-        </div>
-      </div>
-    </section>
 
     </div><!-- /gm-hero-wrapper -->
 
@@ -2017,15 +2261,77 @@
       </div>
     </div>
 
-    <!-- Footer -->
+    <div class="spec-card">
+      <div class="spec-title-row"><span class="spec-title spec-title--script">Aftermath</span></div>
+      <div class="spec-meta-row">
+        <div class="spec-block"><span class="spec-label">Type</span><span class="spec-val">Speculative Campaign</span></div>
+        <div class="spec-block"><span class="spec-label">Role</span><span class="spec-val">Creative Direction / Art Direction / Campaign Design / Product Design</span></div>
+        <div class="spec-block"><span class="spec-label">Year</span><span class="spec-val">2026</span></div>
+      </div>
+    </div>
 
+  </div>
+
+  <!-- ━━━━ ROE ━━━━ -->
+  <div id="page-roe" class="page">
+    <div class="roe-hero">
+      <img src="ROE3.png" alt="ROE" />
+    </div>
+    <div class="roe-grid">
+      <div class="roe-pair">
+        <img src="ROE1.png" alt="" loading="lazy" />
+        <img src="ROE2.png" alt="" loading="lazy" />
+      </div>
+      <div class="roe-full">
+        <img src="ROE4.png" alt="" loading="lazy" />
+      </div>
+    </div>
+    <div class="spec-card">
+      <div class="spec-title-row"><span class="spec-title spec-title--script">ROE</span></div>
+      <div class="spec-meta-row">
+        <div class="spec-block"><span class="spec-label">Type</span><span class="spec-val">Concept Campaign</span></div>
+        <div class="spec-block"><span class="spec-label">Role</span><span class="spec-val">Art Direction / Photography</span></div>
+        <div class="spec-block"><span class="spec-label">Year</span><span class="spec-val">2026</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━ THE PERFECT BLEND ━━━━ -->
+  <div id="page-blend" class="page">
+    <div class="tumble-hero">
+      <video id="blend-page-vid" src="The perfect blend ad.mov" loop playsinline style="cursor:pointer;" onclick="this.paused?this.play():this.pause()"></video>
+      <img src="onul-studio-logo_1.svg" alt="Onul Creative Studio" class="page-logo" onclick="showPage('home')" />
+    </div>
+    <div class="spec-card">
+      <div class="spec-title-row"><span class="spec-title spec-title--script">The Perfect Blend</span></div>
+      <div class="spec-meta-row">
+        <div class="spec-block"><span class="spec-label">Type</span><span class="spec-val">Concept Video Advertisement</span></div>
+        <div class="spec-block"><span class="spec-label">Role</span><span class="spec-val">Creative Direction / Full Production</span></div>
+        <div class="spec-block"><span class="spec-label">Year</span><span class="spec-val">2026</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ━━━━ RUBBRBAND ━━━━ -->
+  <div id="page-rubbrband" class="page">
+    <div class="tumble-hero">
+      <video id="rubbrband-page-vid" src="Rubbrband spec ad.mov" loop playsinline style="cursor:pointer;" onclick="this.paused?this.play():this.pause()"></video>
+    </div>
+    <div class="spec-card">
+      <div class="spec-title-row"><span class="spec-title spec-title--script">Rubbrband Spec Ad</span></div>
+      <div class="spec-meta-row">
+        <div class="spec-block"><span class="spec-label">Type</span><span class="spec-val">Concept Video Advertisement</span></div>
+        <div class="spec-block"><span class="spec-label">Role</span><span class="spec-val">Creative Director / Full Production</span></div>
+        <div class="spec-block"><span class="spec-label">Year</span><span class="spec-val">2026</span></div>
+      </div>
+    </div>
   </div>
 
   <!-- ━━━━ TUMBLE AD ━━━━ -->
   <div id="page-tumble" class="page">
     <div class="tumble-hero">
-      <video src="Tumble Ad.mp4" autoplay loop muted playsinline></video>
-      <span class="tumble-back" onclick="showPage('home')">&larr; Portfolio</span>
+      <video id="tumble-page-vid" src="Tumble Ad.mp4" loop playsinline></video>
+      <img src="onul-studio-logo_1.svg" alt="Onul Creative Studio" class="page-logo" onclick="showPage('home')" />
     </div>
     <div class="tumble-info">
       <div class="tumble-title">TUMBLE AD</div>
@@ -2034,8 +2340,15 @@
     </div>
   </div>
 
+  <button class="back-btn" onclick="showPage('work')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 12H5M5 12l7-7M5 12l7 7"/>
+    </svg>
+    Back to Works
+  </button>
+
   <script>
-    const allPages = ['home','work','brand-identity','about','contact','nuvela','gm','tumble'];
+    const allPages = ['home','work','brand-identity','about','contact','nuvela','gm','tumble','roe','blend','rubbrband'];
 
     function showPage(name) {
       const scrollToWork = name === 'work';
@@ -2047,7 +2360,32 @@
       document.body.classList.toggle('on-nuvela', name === 'nuvela');
       document.body.classList.toggle('on-gm', name === 'gm');
       document.body.classList.toggle('on-tumble', name === 'tumble');
+      document.body.classList.toggle('on-blend', name === 'blend');
+      document.body.classList.toggle('on-roe', name === 'roe');
+      document.body.classList.toggle('on-contact', name === 'contact');
       document.body.classList.toggle('on-home', name === 'home');
+      document.body.classList.toggle('on-rubbrband', name === 'rubbrband');
+      if (name === 'tumble') {
+        const tv = document.getElementById('tumble-page-vid');
+        if (tv) { tv.muted = false; tv.currentTime = 0; tv.play(); }
+      } else {
+        const tv = document.getElementById('tumble-page-vid');
+        if (tv) { tv.pause(); tv.muted = true; }
+      }
+      if (name === 'blend') {
+        const bv = document.getElementById('blend-page-vid');
+        if (bv) { bv.muted = false; bv.currentTime = 0; bv.play(); }
+      } else {
+        const bv = document.getElementById('blend-page-vid');
+        if (bv) { bv.pause(); bv.muted = true; }
+      }
+      if (name === 'rubbrband') {
+        const rv = document.getElementById('rubbrband-page-vid');
+        if (rv) { rv.muted = false; rv.currentTime = 0; rv.play(); }
+      } else {
+        const rv = document.getElementById('rubbrband-page-vid');
+        if (rv) { rv.pause(); rv.muted = true; }
+      }
       if (scrollToWork) {
         requestAnimationFrame(() => {
           const gallery = document.getElementById('pm-work-scroll');
@@ -2085,6 +2423,25 @@
       card.addEventListener('mouseenter', () => v.play());
       card.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
     })();
+
+    // Blend card: play with sound on hover, mute and pause on leave
+    (function () {
+      const card = document.querySelector('.blend-card');
+      const v = document.getElementById('blend-card-vid');
+      if (!card || !v) return;
+      card.addEventListener('mouseenter', () => { v.muted = true; v.play(); });
+      card.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+    })();
+
+    // Rubbrband card: play silent on hover, pause+reset on leave
+    (function () {
+      const card = document.querySelector('.rubbrband-card');
+      const v = document.getElementById('rubbrband-card-vid');
+      if (!card || !v) return;
+      card.addEventListener('mouseenter', () => { v.muted = true; v.play(); });
+      card.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+    })();
+
 
     function initNuvelaNav() {
       const items = document.querySelectorAll('#nv-nav .nv-sb-item');
@@ -2130,7 +2487,7 @@
         const wrapTop  = wrapper.offsetTop;
         const scrollable = wrapper.offsetHeight - window.innerHeight;
         const progress = Math.max(0, Math.min(1, (scrollY - wrapTop) / scrollable));
-        const maxShift = track.scrollWidth - window.innerWidth;
+        const maxShift = track.scrollWidth + track.offsetLeft - window.innerWidth;
         track.style.transform = `translateX(${-progress * maxShift}px)`;
         const inGallery = scrollY >= wrapTop && scrollY < wrapTop + scrollable;
         document.body.classList.toggle('gallery-active', inGallery);
