@@ -1590,6 +1590,7 @@
     body.on-tumble .site-nav { display: none; }
     body.on-blend .site-nav { display: none; }
     body.on-rubbrband .site-nav { display: none; }
+    body.on-vale .site-nav { display: none; }
 
     /* ─── Shared spec card ─── */
     .spec-card {
@@ -2170,7 +2171,14 @@
             </div>
           </div>
 
-          <!-- 03 ROE -->
+          <!-- 03 Vale -->
+          <div class="pm-panel vale-card" onclick="showPage('vale')">
+            <div class="pm-panel-img" style="position:relative;">
+              <video id="vale-card-vid" src="Vale spec.mov" muted playsinline preload="auto" loop style="width:100%;height:100%;object-fit:cover;display:block;"></video>
+            </div>
+          </div>
+
+          <!-- 04 ROE -->
           <div class="pm-panel" onclick="showPage('roe')">
             <div class="pm-panel-img">
               <img src="ROE3.png" alt="ROE" loading="lazy" style="object-position: left center;" />
@@ -2530,6 +2538,22 @@
     </div>
   </div>
 
+  <!-- ━━━━ VALE ━━━━ -->
+  <div id="page-vale" class="page">
+    <div class="tumble-hero">
+      <video id="vale-page-vid" src="Vale spec.mov" loop playsinline style="cursor:pointer;" onclick="this.paused?this.play():this.pause()"></video>
+      <img src="onul-studio-logo_1.svg" alt="Onul Creative Studio" class="page-logo" onclick="showPage('home')" />
+    </div>
+    <div class="spec-card">
+      <div class="spec-title-row"><span class="spec-title spec-title--script">Vale Spec Ad</span></div>
+      <div class="spec-meta-row">
+        <div class="spec-block"><span class="spec-label">Type</span><span class="spec-val">Speculative Concept Video Advertisement</span></div>
+        <div class="spec-block"><span class="spec-label">Role</span><span class="spec-val">Creative Direction / Full Production</span></div>
+        <div class="spec-block"><span class="spec-label">Year</span><span class="spec-val">2026</span></div>
+      </div>
+    </div>
+  </div>
+
   <!-- ━━━━ TUMBLE AD ━━━━ -->
   <div id="page-tumble" class="page">
     <div class="tumble-hero">
@@ -2551,7 +2575,7 @@
   </button>
 
   <script>
-    const allPages = ['home','work','brand-identity','about','contact','gm','tumble','roe','blend','rubbrband'];
+    const allPages = ['home','work','brand-identity','about','contact','gm','tumble','roe','blend','rubbrband','vale'];
 
     function showPage(name) {
       const scrollToWork = name === 'work';
@@ -2567,6 +2591,7 @@
       document.body.classList.toggle('on-contact', name === 'contact');
       document.body.classList.toggle('on-home', name === 'home');
       document.body.classList.toggle('on-rubbrband', name === 'rubbrband');
+      document.body.classList.toggle('on-vale', name === 'vale');
       if (name === 'tumble') {
         const tv = document.getElementById('tumble-page-vid');
         if (tv) { tv.muted = false; tv.currentTime = 0; tv.play(); }
@@ -2587,6 +2612,13 @@
       } else {
         const rv = document.getElementById('rubbrband-page-vid');
         if (rv) { rv.pause(); rv.muted = true; }
+      }
+      if (name === 'vale') {
+        const vv = document.getElementById('vale-page-vid');
+        if (vv) { vv.muted = false; vv.currentTime = 0; vv.play(); }
+      } else {
+        const vv = document.getElementById('vale-page-vid');
+        if (vv) { vv.pause(); vv.muted = true; }
       }
       if (scrollToWork) {
         requestAnimationFrame(() => {
@@ -2657,6 +2689,15 @@
     (function () {
       const card = document.querySelector('.rubbrband-card');
       const v = document.getElementById('rubbrband-card-vid');
+      if (!card || !v) return;
+      card.addEventListener('mouseenter', () => { v.muted = true; v.play(); });
+      card.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+    })();
+
+    // Vale card: play silent on hover, pause+reset on leave
+    (function () {
+      const card = document.querySelector('.vale-card');
+      const v = document.getElementById('vale-card-vid');
       if (!card || !v) return;
       card.addEventListener('mouseenter', () => { v.muted = true; v.play(); });
       card.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
