@@ -1590,6 +1590,72 @@
       .pm-panel { width: 90vw; }
     }
 
+    /* ─── Work category cards ─── */
+    .pm-cat-card { position: relative; cursor: pointer; }
+    .pm-cat-card .pm-panel-img img { transition: filter 0.5s ease, transform 0.5s ease; }
+    .pm-cat-card:hover .pm-panel-img img { filter: brightness(0.55) blur(3px) !important; }
+    .pm-cat-label {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .pm-cat-title {
+      font-family: 'Cormorant SC', serif;
+      font-size: clamp(1.1rem, 2vw, 1.8rem);
+      font-weight: 300;
+      color: #fff;
+      letter-spacing: 0.08em;
+      text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+    }
+    /* Sub-gallery logo */
+    .pm-sub-logo-wrap {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 12vw;
+      min-width: 8rem;
+      cursor: pointer;
+    }
+    .pm-sub-logo {
+      height: clamp(5rem, 8vw, 10rem);
+      width: auto;
+      filter: brightness(0) invert(1);
+      opacity: 0.85;
+      transition: opacity 0.2s;
+    }
+    .pm-sub-logo:hover { opacity: 1; }
+    /* Back button card */
+    .pm-sub-back {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 0.75rem;
+      width: 10vw;
+      min-width: 7rem;
+      cursor: pointer;
+      color: rgba(255,255,255,0.5);
+      font-family: 'Cormorant SC', serif;
+      font-size: clamp(0.85rem, 1.4vw, 1.2rem);
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .pm-sub-back:hover { color: #fff; }
+    .pm-sub-back svg { width: 1.4rem; height: 1.4rem; }
+    /* Sub-track: same flex row as main track */
+    .pm-sub-track { gap: 1rem; padding-right: 3rem; }
+    @media (max-width: 768px) {
+      .pm-sub-logo-wrap { width: auto; min-width: 0; padding: 1rem; }
+      .pm-sub-back { width: auto; min-width: 0; padding: 1rem; flex-direction: row; }
+    }
+
     /* ─── ROE ─── */
     #page-roe.active { display: block !important; }
     body.on-roe .site-nav { display: none; }
@@ -2095,23 +2161,25 @@
 
       /* ── Landing page ── */
       .pm-about-name {
-        right: 1rem;
-        top: 1rem;
-        left: auto;
-        transform: none;
-        align-items: flex-end;
+        right: auto;
+        left: 50%;
+        top: 1.5rem;
+        transform: translateX(-50%);
+        align-items: center;
       }
       .pm-about-logo-inline {
-        height: clamp(7rem, 40vw, 12rem);
+        height: clamp(6rem, 35vw, 10rem);
       }
       .pm-about-nav {
-        right: 50%;
+        right: auto;
+        left: 50%;
         top: auto;
         bottom: 2.5rem;
-        transform: translateX(50%);
+        transform: translateX(-50%);
         flex-direction: row;
         gap: 2rem;
         align-items: center;
+        white-space: nowrap;
       }
       .pm-about-nav a {
         height: auto;
@@ -2292,6 +2360,57 @@
       .blend-card-cover,
       .rubbrband-card-cover,
       .tumble-card-cover { opacity: 1 !important; }
+
+      /* ── Work category cards (mobile) ── */
+      .pm-cat-label {
+        align-items: center;
+        justify-content: center;
+      }
+      .pm-cat-title {
+        font-size: clamp(1rem, 5vw, 1.4rem);
+        text-align: center;
+      }
+
+      /* ── Sub-gallery (mobile: vertical stack) ── */
+      .pm-sub-track {
+        flex-direction: column;
+        transform: none !important;
+        gap: 1rem;
+        padding-right: 0;
+        width: 100%;
+        height: auto;
+      }
+      .pm-sub-logo-wrap {
+        width: 100%;
+        padding: 1.5rem 0 0.5rem;
+        justify-content: center;
+      }
+      .pm-sub-logo {
+        height: clamp(4rem, 20vw, 7rem);
+      }
+      .pm-sub-back {
+        flex-direction: row;
+        width: 100%;
+        justify-content: center;
+        padding: 1.5rem 0;
+        font-size: clamp(0.85rem, 3.5vw, 1rem);
+      }
+
+      /* ── Image Collection: single column centered ── */
+      .ic-columns {
+        padding: 0.6rem 2rem;
+        justify-content: center;
+      }
+      #ic-col-2 { display: none; }
+      #ic-sb-2  { display: none; }
+      .ic-col   { flex: 0 0 100%; max-width: 100%; }
+
+      /* ── IC logo centered ── */
+      .ic-center-logo {
+        left: 50%;
+        transform: translateX(-50%);
+        height: clamp(3rem, 12vw, 5rem);
+      }
     }
   </style>
 </head>
@@ -2333,7 +2452,38 @@
     <!-- ② Horizontal scroll work gallery -->
     <section class="pm-work-scroll" id="pm-work-scroll">
       <div class="pm-work-sticky" id="pm-work-sticky">
+        <!-- ── Category view (default) ── -->
         <div class="pm-work-track" id="pm-work-track">
+
+          <!-- Category: Video Works -->
+          <div class="pm-panel pm-cat-card" onclick="showWorkCategory('video')">
+            <div class="pm-panel-img">
+              <img src="Cover.webp" alt="Video Works" style="filter:brightness(0.45) blur(3px);transform:scale(1.08);" />
+            </div>
+            <div class="pm-cat-label">
+              <span class="pm-cat-title">Video Works</span>
+            </div>
+          </div>
+
+          <!-- Category: Fashion Campaigns -->
+          <div class="pm-panel pm-cat-card" onclick="showWorkCategory('fashion')">
+            <div class="pm-panel-img">
+              <img src="ROE3.png" alt="Fashion Campaigns" style="filter:brightness(0.45) blur(3px);transform:scale(1.08);object-position:left center;" />
+            </div>
+            <div class="pm-cat-label">
+              <span class="pm-cat-title">Fashion Campaigns</span>
+            </div>
+          </div>
+
+        </div><!-- /track category -->
+
+        <!-- ── Video Works sub-gallery ── -->
+        <div class="pm-work-track pm-sub-track" id="pm-sub-video" style="display:none;">
+
+          <!-- Logo -->
+          <div class="pm-sub-logo-wrap">
+            <img src="onul-studio-logo_1.svg" class="pm-sub-logo" onclick="showWorkCategory(null)" />
+          </div>
 
           <!-- 01 The Perfect Blend -->
           <div class="pm-panel blend-card" onclick="showPage('blend')">
@@ -2358,29 +2508,51 @@
             </div>
           </div>
 
-          <!-- 04 ROE -->
+          <!-- Back button -->
+          <div class="pm-sub-back" onclick="showWorkCategory(null)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
+            Back to Work
+          </div>
+
+        </div><!-- /sub-video -->
+
+        <!-- ── Fashion Campaigns sub-gallery ── -->
+        <div class="pm-work-track pm-sub-track" id="pm-sub-fashion" style="display:none;">
+
+          <!-- Logo -->
+          <div class="pm-sub-logo-wrap">
+            <img src="onul-studio-logo_1.svg" class="pm-sub-logo" onclick="showWorkCategory(null)" />
+          </div>
+
+          <!-- ROE -->
           <div class="pm-panel" onclick="showPage('roe')">
             <div class="pm-panel-img">
               <img src="ROE3.png" alt="ROE" loading="lazy" style="object-position: left center;" />
             </div>
           </div>
 
-          <!-- 03 Gentle Monster -->
+          <!-- Gentle Monster -->
           <div class="pm-panel" onclick="showPage('gm')">
             <div class="pm-panel-img">
               <img src="gmc2.png" alt="Gentle Monster Aftermath" loading="lazy" />
             </div>
           </div>
 
-          <!-- 03 Tumble Ad (hidden) -->
+          <!-- Back button -->
+          <div class="pm-sub-back" onclick="showWorkCategory(null)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M5 12l7-7M5 12l7 7"/></svg>
+            Back to Work
+          </div>
+
+        </div><!-- /sub-fashion -->
+
+          <!-- Tumble Ad (hidden) -->
           <div class="pm-panel tumble-card" onclick="showPage('tumble')" style="display:none;">
             <div class="pm-panel-img" style="position:relative;">
               <video id="tumble-card-vid" src="Tumble Ad.mp4" muted playsinline preload="auto" loop style="width:100%;height:100%;object-fit:cover;display:block;"></video>
               <img src="tumble card.png" alt="Tumble Ad" class="tumble-card-cover" />
             </div>
           </div>
-
-        </div><!-- /track -->
 
         <!-- Work label — sits in top black margin -->
         <div class="work-margin-label">WORK</div>
@@ -2890,6 +3062,7 @@
         if (vv) { vv.pause(); vv.muted = true; }
       }
       if (scrollToWork) {
+        showWorkCategory(null);
         requestAnimationFrame(() => {
           const gallery = document.getElementById('pm-work-scroll');
           if (gallery) gallery.scrollIntoView({ behavior: 'smooth' });
@@ -2898,6 +3071,22 @@
         window.scrollTo({ top: 0, behavior: 'instant' });
       }
       if (name === 'nuvela') initNuvelaNav();
+    }
+
+    function showWorkCategory(cat) {
+      const mainTrack  = document.getElementById('pm-work-track');
+      const subVideo   = document.getElementById('pm-sub-video');
+      const subFashion = document.getElementById('pm-sub-fashion');
+      if (!mainTrack || !subVideo || !subFashion) return;
+
+      mainTrack.style.display  = cat === null ? 'flex' : 'none';
+      subVideo.style.display   = cat === 'video'   ? 'flex' : 'none';
+      subFashion.style.display = cat === 'fashion' ? 'flex' : 'none';
+      subVideo.style.transform   = 'translateX(0)';
+      subFashion.style.transform = 'translateX(0)';
+
+      // Trigger scroll update so sticky track recalculates
+      requestAnimationFrame(() => window.dispatchEvent(new Event('scroll')));
     }
 
     // Set on-home on initial load
@@ -2944,6 +3133,53 @@
       if (!card || !v) return;
       card.addEventListener('mouseenter', () => v.play());
       card.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
+    })();
+
+    // Sub-gallery hover scroll
+    (function () {
+      function bindHoverScroll(trackId) {
+        const sticky  = document.getElementById('pm-work-sticky');
+        const track   = document.getElementById(trackId);
+        if (!sticky || !track) return;
+
+        let raf = null;
+        let mouseX = 0;
+        let offset = 0;
+
+        const getMax = () => Math.max(0, track.scrollWidth - sticky.clientWidth);
+
+        const step = () => {
+          const W      = sticky.clientWidth;
+          const zone   = W * 0.2;           // dead zone in the middle 20%
+          const center = W / 2;
+          const dist   = mouseX - center;
+          const edge   = W / 2 - zone / 2;
+          let speed = 0;
+          if (Math.abs(dist) > zone / 2) {
+            speed = ((Math.abs(dist) - zone / 2) / edge) * 6; // max ~6px/frame
+            speed = Math.sign(dist) * Math.min(speed, 6);
+          }
+          offset = Math.max(-getMax(), Math.min(0, offset - speed));
+          track.style.transform = `translateX(${offset}px)`;
+          raf = requestAnimationFrame(step);
+        };
+
+        sticky.addEventListener('mouseenter', (e) => {
+          if (track.style.display === 'none') return;
+          mouseX = e.clientX - sticky.getBoundingClientRect().left;
+          if (!raf) raf = requestAnimationFrame(step);
+        });
+        sticky.addEventListener('mousemove', (e) => {
+          mouseX = e.clientX - sticky.getBoundingClientRect().left;
+          if (track.style.display !== 'none' && !raf) raf = requestAnimationFrame(step);
+        });
+        sticky.addEventListener('mouseleave', () => {
+          if (raf) { cancelAnimationFrame(raf); raf = null; }
+        });
+      }
+
+      bindHoverScroll('pm-sub-video');
+      bindHoverScroll('pm-sub-fashion');
     })();
 
     // Blend card: play with sound on hover, mute and pause on leave
