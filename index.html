@@ -521,17 +521,6 @@
       padding: 0;
       text-indent: 0;
     }
-    .contact-email {
-      display: block;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1rem;
-      font-weight: 300;
-      letter-spacing: 0.04em;
-      color: rgba(255,255,255,0.75);
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      margin-bottom: 3rem;
-    }
     .contact-form {
       display: flex;
       flex-direction: column;
@@ -574,6 +563,54 @@
       transition: border-color 0.2s, color 0.2s;
     }
     .contact-submit:hover { border-color: #fff; color: #fff; }
+    .contact-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .contact-email-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      padding: 0.6rem 1.4rem 0.6rem 1rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 2rem;
+      color: rgba(255,255,255,0.7);
+      font-family: 'Cormorant SC', serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      background: transparent;
+    }
+    .contact-email-btn:hover {
+      border-color: #fff;
+      color: #fff;
+      background: rgba(255,255,255,0.06);
+    }
+    .contact-ig {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin-top: 0;
+      padding: 0.6rem 1.4rem 0.6rem 1rem;
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 2rem;
+      color: rgba(255,255,255,0.7);
+      font-family: 'Cormorant SC', serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      background: transparent;
+    }
+    .contact-ig:hover {
+      border-color: #fff;
+      color: #fff;
+      background: rgba(255,255,255,0.06);
+    }
+    .contact-ig-icon { width: 1.1rem; height: 1.1rem; flex-shrink: 0; }
 
     /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
        RESPONSIVE
@@ -1286,12 +1323,11 @@
     }
     .pm-about-name {
       position: absolute;
-      left: -1rem;
-      top: 50%;
-      transform: translateY(-50%);
+      right: 1.5rem;
+      top: 1.5rem;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: flex-end;
       line-height: 1;
       z-index: 2;
     }
@@ -1370,7 +1406,7 @@
     body.on-roe .back-btn { display: flex; }
 
     .pm-about-logo-inline {
-      height: clamp(10rem, 18vw, 22rem);
+      height: clamp(7rem, 12vw, 14rem);
       width: auto;
       filter: brightness(0) invert(1) sepia(1) saturate(0.1) brightness(0.97);
       opacity: 0.9;
@@ -1910,6 +1946,148 @@
       color: rgba(255,255,255,0.25); letter-spacing: 0.06em;
     }
 
+    /* ── Work margin label ── */
+    .work-margin-label {
+      position: absolute;
+      top: 0.4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Cormorant SC', serif;
+      font-weight: 600;
+      font-size: clamp(0.85rem, 1.4vw, 1.2rem);
+      letter-spacing: 0.18em;
+      color: #F4F1EC;
+      opacity: 0.65;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    /* ── Image Collection teaser ── */
+    .img-collection-teaser {
+      position: absolute;
+      bottom: 0.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.6rem;
+      cursor: pointer;
+      opacity: 0.65;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .img-collection-teaser:hover { opacity: 1; }
+    .img-collection-label {
+      font-family: 'Cormorant SC', serif;
+      font-weight: 600;
+      font-size: clamp(0.85rem, 1.4vw, 1.2rem);
+      letter-spacing: 0.18em;
+      color: #F4F1EC;
+      mix-blend-mode: difference;
+    }
+    .img-collection-arrow {
+      width: 1.2rem;
+      height: 1.2rem;
+      color: #F4F1EC;
+      stroke-width: 2;
+      mix-blend-mode: difference;
+    }
+    .img-collection-section {
+      background: #0a0a09;
+      height: 100vh;
+      border-top: 1px solid rgba(244,241,236,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+    .ic-columns {
+      display: flex;
+      height: 100%;
+      gap: 0.6rem;
+      padding: 0.6rem 3rem;
+    }
+    .ic-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      will-change: transform;
+    }
+    .ic-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: filter 0.2s;
+    }
+    .ic-img:hover { filter: brightness(1.08); }
+    .ic-scrollbar {
+      position: absolute;
+      top: 1.2rem;
+      bottom: 1.2rem;
+      width: 3px;
+      background: rgba(244,241,236,0.1);
+      border-radius: 2px;
+      z-index: 10;
+      cursor: pointer;
+    }
+    .ic-scrollbar--left  { left: 0.7rem; }
+    .ic-scrollbar--right { right: 0.7rem; }
+    .ic-scrollbar-thumb {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: rgba(244,241,236,0.45);
+      border-radius: 2px;
+      cursor: grab;
+      transition: background 0.2s;
+    }
+    .ic-scrollbar-thumb:hover { background: rgba(244,241,236,0.75); }
+    .ic-scrollbar-thumb:active { cursor: grabbing; background: rgba(244,241,236,0.9); }
+    .ic-center-logo {
+      position: absolute;
+      top: 1.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 201;
+      cursor: pointer;
+      height: clamp(5rem, 7vw, 8rem);
+      width: auto;
+      opacity: 0.85;
+      pointer-events: all;
+      transition: opacity 0.2s;
+      filter: brightness(0) invert(1);
+    }
+    .ic-center-logo:hover { opacity: 1; }
+    .ic-lightbox {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 20;
+      cursor: zoom-out;
+    }
+    .ic-lightbox.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .ic-lightbox-img {
+      max-width: 88vw;
+      max-height: 84vh;
+      height: auto;
+      width: auto;
+      border-radius: 4px;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.9);
+    }
+
     /* ══════════════════════════════════════
        MOBILE  (touch devices / ≤ 768px)
        ══════════════════════════════════════ */
@@ -1917,10 +2095,11 @@
 
       /* ── Landing page ── */
       .pm-about-name {
-        left: 50%;
-        top: 38%;
-        transform: translate(-50%, -50%);
-        align-items: center;
+        right: 1rem;
+        top: 1rem;
+        left: auto;
+        transform: none;
+        align-items: flex-end;
       }
       .pm-about-logo-inline {
         height: clamp(7rem, 40vw, 12rem);
@@ -2146,6 +2325,7 @@
       <nav class="pm-about-nav">
         <a href="#" onclick="showPage('work');return false;">work</a>
         <!-- <a href="#" onclick="showPage('about');return false;">about</a> -->
+        <a href="#" onclick="document.getElementById('img-collection-section').scrollIntoView({behavior:'smooth'});return false;">image collection</a>
         <a href="#" onclick="showPage('contact');return false;">contact</a>
       </nav>
     </section>
@@ -2201,9 +2381,82 @@
           </div>
 
         </div><!-- /track -->
+
+        <!-- Work label — sits in top black margin -->
+        <div class="work-margin-label">WORK</div>
+
+        <!-- Image Collection teaser — sits in bottom black margin -->
+        <div class="img-collection-teaser" onclick="document.getElementById('img-collection-section').scrollIntoView({behavior:'smooth'})">
+          <span class="img-collection-label">Image Collection</span>
+          <svg class="img-collection-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5v14M5 12l7 7 7-7"/>
+          </svg>
+        </div>
+
       </div><!-- /sticky -->
     </section>
 
+    <!-- ━━━━ IMAGE COLLECTION ━━━━ -->
+    <section id="img-collection-section" class="img-collection-section">
+
+      <!-- Left scrollbar: controls column 1 -->
+      <div class="ic-scrollbar ic-scrollbar--left" id="ic-sb-1">
+        <div class="ic-scrollbar-thumb" id="ic-thumb-1"></div>
+      </div>
+
+      <div class="ic-columns">
+        <!-- Column 1: all images, scrolls downward -->
+        <div class="ic-col" id="ic-col-1">
+          <img class="ic-img" src="coral.png" alt="" />
+          <img class="ic-img" src="dog.png" alt="" />
+          <img class="ic-img" src="swim.png" alt="" />
+          <img class="ic-img" src="lineup.png" alt="" />
+          <img class="ic-img" src="peacock.png" alt="" />
+          <img class="ic-img" src="potential landing page.png" alt="" />
+          <img class="ic-img" src="elegant minimal.png" alt="" />
+          <img class="ic-img" src="elegant minimal 2.png" alt="" />
+          <!-- duplicate for seamless loop -->
+          <img class="ic-img" src="coral.png" alt="" />
+          <img class="ic-img" src="dog.png" alt="" />
+          <img class="ic-img" src="swim.png" alt="" />
+          <img class="ic-img" src="lineup.png" alt="" />
+          <img class="ic-img" src="peacock.png" alt="" />
+          <img class="ic-img" src="potential landing page.png" alt="" />
+          <img class="ic-img" src="elegant minimal.png" alt="" />
+          <img class="ic-img" src="elegant minimal 2.png" alt="" />
+        </div>
+        <!-- Column 2: reverse order, scrolls upward -->
+        <div class="ic-col" id="ic-col-2">
+          <img class="ic-img" src="elegant minimal 2.png" alt="" />
+          <img class="ic-img" src="elegant minimal.png" alt="" />
+          <img class="ic-img" src="potential landing page.png" alt="" />
+          <img class="ic-img" src="peacock.png" alt="" />
+          <img class="ic-img" src="lineup.png" alt="" />
+          <img class="ic-img" src="swim.png" alt="" />
+          <img class="ic-img" src="dog.png" alt="" />
+          <img class="ic-img" src="coral.png" alt="" />
+          <!-- duplicate -->
+          <img class="ic-img" src="elegant minimal 2.png" alt="" />
+          <img class="ic-img" src="elegant minimal.png" alt="" />
+          <img class="ic-img" src="potential landing page.png" alt="" />
+          <img class="ic-img" src="peacock.png" alt="" />
+          <img class="ic-img" src="lineup.png" alt="" />
+          <img class="ic-img" src="swim.png" alt="" />
+          <img class="ic-img" src="dog.png" alt="" />
+          <img class="ic-img" src="coral.png" alt="" />
+        </div>
+      </div>
+
+      <!-- Right scrollbar: controls column 2 -->
+      <div class="ic-scrollbar ic-scrollbar--right" id="ic-sb-2">
+        <div class="ic-scrollbar-thumb" id="ic-thumb-2"></div>
+      </div>
+
+      <img src="onul-studio-logo_1.svg" alt="Onul Creative Studio" class="ic-center-logo" id="ic-logo-home" />
+      <div class="ic-lightbox" id="ic-lightbox">
+        <img class="ic-lightbox-img" id="ic-lightbox-img" src="" alt="" />
+      </div>
+    </section>
 
   </div><!-- /page-home -->
 
@@ -2240,7 +2493,23 @@
       <img src="onul-studio-logo_1.svg" alt="Onul Creative Studio" class="page-logo" onclick="showPage('home')" />
       <div class="contact-content">
         <h1 class="contact-title">Contact</h1>
-        <a class="contact-email" href="mailto:onulstudio223@gmail.com">onulstudio223@gmail.com</a>
+        <div class="contact-links">
+          <button class="contact-email-btn" onclick="navigator.clipboard.writeText('onulstudio223@gmail.com').then(()=>{this.querySelector('.contact-email-label').textContent='Copied!';setTimeout(()=>{this.querySelector('.contact-email-label').textContent='Email'},1500)})">
+            <svg class="contact-ig-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2"/>
+              <path d="M2 7l10 7 10-7"/>
+            </svg>
+            <span class="contact-email-label">Email</span>
+          </button>
+          <a class="contact-ig" href="https://www.instagram.com/onulcreativestudio" target="_blank" rel="noopener">
+            <svg class="contact-ig-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4"/>
+              <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+            @onulcreativestudio
+          </a>
+        </div>
         <form class="contact-form" onsubmit="return false;">
           <div class="contact-field"><input type="text" placeholder="Name" /></div>
           <div class="contact-field"><input type="email" placeholder="Email" /></div>
@@ -2634,6 +2903,7 @@
     // Set on-home on initial load
     document.body.classList.add('on-home');
 
+
     const isMobile = () => window.innerWidth <= 768 || window.matchMedia('(hover: none) and (pointer: coarse)').matches;
 
     // Work gallery horizontal scroll
@@ -2703,6 +2973,149 @@
       card.addEventListener('mouseleave', () => { v.pause(); v.currentTime = 0; });
     })();
 
+
+    // ── Image Collection: auto-scroll + hover/scrollbar manual control + lightbox ──
+    (function () {
+      const col1    = document.getElementById('ic-col-1');
+      const col2    = document.getElementById('ic-col-2');
+      const section = document.getElementById('img-collection-section');
+      const lightbox = document.getElementById('ic-lightbox');
+      const lbImg   = document.getElementById('ic-lightbox-img');
+      if (!col1 || !col2 || !lightbox) return;
+
+      const BASE        = 0.45;   // px per frame auto speed
+      const GAP         = 10;     // px gap between images
+      const RESUME_DELAY = 1200;  // ms before auto-scroll resumes after manual input
+
+      let p1 = 0, p2 = 0;
+      let manual1 = false, manual2 = false;
+      let resume1Timer = null, resume2Timer = null;
+
+      const half = (col) => (col.scrollHeight + GAP) / 2;
+
+      const scheduleResume = (colIdx) => {
+        if (colIdx === 1) {
+          clearTimeout(resume1Timer);
+          manual1 = true;
+          resume1Timer = setTimeout(() => { manual1 = false; }, RESUME_DELAY);
+        } else {
+          clearTimeout(resume2Timer);
+          manual2 = true;
+          resume2Timer = setTimeout(() => { manual2 = false; }, RESUME_DELAY);
+        }
+      };
+
+      const wrap = (p, h) => {
+        if (p <= -h) p += h;
+        if (p > 0)   p -= h;
+        return p;
+      };
+
+      // Scrollbar thumbs
+      const thumb1 = document.getElementById('ic-thumb-1');
+      const thumb2 = document.getElementById('ic-thumb-2');
+      const sb1 = document.getElementById('ic-sb-1');
+      const sb2 = document.getElementById('ic-sb-2');
+
+      const updateThumbs = () => {
+        if (!thumb1 || !thumb2 || !sb1 || !sb2) return;
+        const h1 = half(col1), h2 = half(col2);
+        const norm1 = ((-p1 % h1 + h1) % h1) / h1;
+        const norm2 = ((-p2 % h2 + h2) % h2) / h2;
+        thumb1.style.top = (norm1 * (sb1.clientHeight - thumb1.offsetHeight)) + 'px';
+        thumb2.style.top = (norm2 * (sb2.clientHeight - thumb2.offsetHeight)) + 'px';
+      };
+
+      // RAF loop: auto-scroll whichever column isn't being manually controlled
+      const tick = () => {
+        const h1 = half(col1), h2 = half(col2);
+        if (!manual1) { p1 -= BASE;  p1 = wrap(p1, h1); }
+        if (!manual2) { p2 += BASE;  p2 = wrap(p2, h2); }
+        col1.style.transform = `translateY(${p1}px)`;
+        col2.style.transform = `translateY(${p2}px)`;
+        updateThumbs();
+        requestAnimationFrame(tick);
+      };
+
+      // Hover + wheel: scroll the column the cursor is over
+      const colArea = document.getElementById('ic-columns') || section.querySelector('.ic-columns');
+      const onWheel = (e) => {
+        const rect1 = col1.getBoundingClientRect();
+        const overCol1 = e.clientX < (rect1.left + rect1.right) / 2 + 20;
+        const delta = e.deltaY * 0.8;
+        if (overCol1) {
+          p1 -= delta;
+          scheduleResume(1);
+        } else {
+          p2 -= delta;
+          scheduleResume(2);
+        }
+        e.preventDefault();
+        e.stopPropagation();
+      };
+      section.addEventListener('wheel', onWheel, { passive: false });
+
+      // Scrollbar drag
+      const bindScrollbarDrag = (thumb, sb, colIdx) => {
+        if (!thumb || !sb) return;
+        let dragging = false, startY = 0, startP = 0;
+        const onDown = (e) => {
+          dragging = true;
+          startY = e.touches ? e.touches[0].clientY : e.clientY;
+          startP = colIdx === 1 ? p1 : p2;
+          scheduleResume(colIdx);
+          e.preventDefault();
+        };
+        const onMove = (e) => {
+          if (!dragging) return;
+          const cy = e.touches ? e.touches[0].clientY : e.clientY;
+          const dy = cy - startY;
+          const h = half(colIdx === 1 ? col1 : col2);
+          const delta = (dy / (sb.clientHeight - thumb.offsetHeight)) * h;
+          if (colIdx === 1) p1 = startP - delta;
+          else p2 = startP - delta;
+          scheduleResume(colIdx);
+        };
+        const onUp = () => { dragging = false; };
+        thumb.addEventListener('mousedown', onDown);
+        thumb.addEventListener('touchstart', onDown, { passive: false });
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('touchmove', onMove, { passive: false });
+        document.addEventListener('mouseup', onUp);
+        document.addEventListener('touchend', onUp);
+      };
+
+      bindScrollbarDrag(thumb1, sb1, 1);
+      bindScrollbarDrag(thumb2, sb2, 2);
+
+      // Start after images load so scrollHeight is accurate
+      const imgs = section.querySelectorAll('.ic-img');
+      let loaded = 0;
+      const onLoad = () => { if (++loaded >= imgs.length) { p1 = 0; p2 = -half(col2); requestAnimationFrame(tick); } };
+      imgs.forEach(img => { if (img.complete) onLoad(); else img.addEventListener('load', onLoad); });
+
+      // Logo → back to landing
+      const icLogo = document.getElementById('ic-logo-home');
+      if (icLogo) {
+        icLogo.addEventListener('click', (e) => {
+          e.stopPropagation();
+          showPage('home');
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
+        });
+      }
+
+      // Lightbox
+      section.addEventListener('click', e => {
+        if (e.target.closest('.ic-scrollbar') || e.target.closest('#ic-logo-home')) return;
+        const img = e.target.closest('.ic-img');
+        if (!img) return;
+        lbImg.src = img.src;
+        lightbox.classList.add('open');
+      });
+      lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
+    })();
 
     function initNuvelaNav() {
       const items = document.querySelectorAll('#nv-nav .nv-sb-item');
