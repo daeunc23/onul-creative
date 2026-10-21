@@ -6,7 +6,7 @@
   <title>Onul Creative Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&family=Raleway:wght@100;200&family=Chakra+Petch:wght@300;400;500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;1,6..96,300;1,6..96,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,200;0,9..144,300;1,9..144,100;1,9..144,200&family=Italiana&family=Cinzel:wght@300;400&family=Gilda+Display&family=Cormorant+SC:wght@300;400&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500&family=Raleway:wght@100;200&family=Chakra+Petch:wght@300;400;500&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Bodoni+Moda:ital,opsz,wght@0,6..96,300;0,6..96,400;1,6..96,300;1,6..96,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Fraunces:ital,opsz,wght@0,9..144,100;0,9..144,200;0,9..144,300;1,9..144,100;1,9..144,200&family=Italiana&family=Cinzel:wght@300;400&family=Gilda+Display&family=Cormorant+SC:wght@300;400&family=Great+Vibes&family=Jost:wght@300;400;500&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet" />
   <style>
     @font-face {
       font-family: 'TeX Gyre Termes';
@@ -80,6 +80,7 @@
     }
     body.on-nuvela .site-nav { display: none; }
     body.on-gm .site-nav { display: none; }
+    body.on-work .site-nav { display: none; }
     body.on-home .nav-left,
     body.on-home .nav-right,
     body.on-home .nav-logo { visibility: hidden; }
@@ -1323,11 +1324,11 @@
     }
     .pm-about-name {
       position: absolute;
-      right: 1.5rem;
-      top: 1.5rem;
+      left: -1rem;
+      top: -1rem;
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
+      align-items: flex-start;
       line-height: 1;
       z-index: 2;
     }
@@ -1344,9 +1345,9 @@
     }
     .pm-about-nav {
       position: absolute;
-      right: 2rem;
-      top: 50%;
-      transform: translateY(-50%);
+      right: 1.5rem;
+      top: 1.5rem;
+      transform: none;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
@@ -1406,7 +1407,7 @@
     body.on-roe .back-btn { display: flex; }
 
     .pm-about-logo-inline {
-      height: clamp(7rem, 12vw, 14rem);
+      height: clamp(6rem, 10vw, 12rem);
       width: auto;
       filter: brightness(0) invert(1) sepia(1) saturate(0.1) brightness(0.97);
       opacity: 0.9;
@@ -2161,8 +2162,8 @@
 
       /* ── Landing page ── */
       .pm-about-name {
-        right: auto;
         left: 50%;
+        right: auto;
         top: 1.5rem;
         transform: translateX(-50%);
         align-items: center;
@@ -2413,6 +2414,291 @@
       }
     }
   </style>
+
+  <!-- ━━ WORK PAGE STYLES ━━ -->
+  <style>
+    /* ── Variables ── */
+    #page-work {
+      --wp-bg:       #F2F0EC;
+      --wp-ink:      #151413;
+      --wp-muted:    #77726B;
+      --wp-tile-bg:  #E6E2DB;
+      --wp-font-h:   'Bodoni Moda', Georgia, serif;
+      --wp-font-ui:  'Jost', system-ui, sans-serif;
+      --wp-font-mono:'IBM Plex Mono', monospace;
+      background: var(--wp-bg);
+      color: var(--wp-ink);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    .wp-header {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      padding: 32px 48px;
+    }
+    .wp-nav-left  { display: flex; gap: 32px; }
+    .wp-nav-right { display: flex; justify-content: flex-end; }
+    .wp-nav-link {
+      font-family: var(--wp-font-ui);
+      font-size: 12px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      text-decoration: none;
+      cursor: pointer;
+      color: var(--wp-ink);
+      transition: opacity .2s;
+    }
+    .wp-nav-muted { color: var(--wp-muted); }
+    .wp-nav-link:hover { opacity: .6; }
+    .wp-header-logo {
+      height: 26px;
+      width: auto;
+      display: block;
+      margin: 0 auto;
+      cursor: pointer;
+      filter: brightness(0);
+      transition: opacity .2s;
+    }
+    .wp-header-logo:hover { opacity: .6; }
+
+    /* ── Hero ── */
+    .wp-hero {
+      padding: 64px 48px 72px;
+      text-align: center;
+    }
+    .wp-hero-title {
+      font-family: var(--wp-font-h);
+      font-size: 80px;
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      text-wrap: balance;
+      margin: 0;
+      color: var(--wp-ink);
+    }
+    .wp-hero-title em { font-style: italic; }
+
+    /* ── Section ── */
+    .wp-section { padding: 0 48px 120px; }
+    .wp-section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 1px solid var(--wp-ink);
+      padding-bottom: 16px;
+      margin-bottom: 32px;
+    }
+    .wp-section-name {
+      font-family: var(--wp-font-h);
+      font-size: 40px;
+      font-weight: 400;
+      line-height: 1;
+    }
+    .wp-section-count {
+      font-family: var(--wp-font-mono);
+      font-size: 12px;
+      color: var(--wp-muted);
+    }
+
+    /* ── Grid ── */
+    .wp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      column-gap: 24px;
+      row-gap: 56px;
+    }
+
+    /* ── Tile ── */
+    .wp-tile {
+      cursor: pointer;
+      transition: opacity .25s;
+    }
+    .wp-tile:hover { opacity: .75; }
+    .wp-media-box {
+      aspect-ratio: 16/9;
+      background: var(--wp-tile-bg);
+      overflow: hidden;
+      position: relative;
+    }
+    .wp-cover {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .wp-vid-preview {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      transition: opacity .3s;
+      pointer-events: none;
+    }
+
+    /* ── Caption ── */
+    .wp-caption {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .wp-caption-left { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
+    .wp-tile-title {
+      font-family: var(--wp-font-h);
+      font-size: 24px;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+    .wp-tile-client {
+      font-family: var(--wp-font-h);
+      font-size: 16px;
+      font-style: italic;
+      color: var(--wp-muted);
+    }
+    .wp-tile-type {
+      font-family: var(--wp-font-ui);
+      font-size: 11px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--wp-muted);
+      white-space: nowrap;
+    }
+
+    /* ── Viewer ── */
+    .wp-viewer {
+      position: fixed;
+      inset: 0;
+      background: #0B0B0A;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+    }
+    .wp-viewer.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .wp-viewer-stage {
+      position: relative;
+      width: min(100vw, 177.78vh);
+      aspect-ratio: 16/9;
+      max-height: 100vh;
+      background: #000;
+      overflow: hidden;
+    }
+    .wp-viewer-vid,
+    .wp-viewer-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+    }
+    .wp-viewer-vid.active,
+    .wp-viewer-img.active { display: block; }
+
+    /* Top bar */
+    .wp-viewer-top {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 40px;
+      background: linear-gradient(to bottom, #0B0B0A, transparent);
+      z-index: 1001;
+    }
+    .wp-viewer-counter {
+      font-family: var(--wp-font-mono, 'IBM Plex Mono', monospace);
+      font-size: 12px;
+      color: #9A958D;
+    }
+    .wp-viewer-close {
+      font-family: 'Jost', system-ui, sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: #EDE9E2;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    .wp-viewer-close:hover { opacity: .6; }
+
+    /* Bottom bar */
+    .wp-viewer-bottom {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 24px 40px;
+      background: linear-gradient(to top, #0B0B0A, transparent);
+      z-index: 1001;
+    }
+    .wp-viewer-info { flex: 1; }
+    .wp-viewer-info-title {
+      font-family: 'Bodoni Moda', Georgia, serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: #EDE9E2;
+      line-height: 1.1;
+    }
+    .wp-viewer-info-title em { font-style: italic; color: #9A958D; }
+    .wp-viewer-info-meta {
+      font-family: 'Jost', system-ui, sans-serif;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: #9A958D;
+      margin-top: 6px;
+    }
+    .wp-viewer-nav {
+      display: flex;
+      gap: 32px;
+      flex-shrink: 0;
+    }
+    .wp-viewer-btn {
+      font-family: 'Jost', system-ui, sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: #EDE9E2;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity .2s;
+    }
+    .wp-viewer-btn:hover { opacity: .6; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .wp-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .wp-header { padding: 20px; }
+      .wp-hero { padding: 40px 20px 56px; }
+      .wp-hero-title { font-size: 48px; }
+      .wp-section { padding: 0 20px 80px; }
+      .wp-grid { grid-template-columns: 1fr; }
+      .wp-viewer-bottom { flex-direction: column; align-items: flex-start; gap: 16px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -2632,13 +2918,145 @@
 
   </div><!-- /page-home -->
 
-  <!-- ━━━━ SCAFFOLD: WORK ━━━━ -->
+  <!-- ━━━━ WORK PAGE ━━━━ -->
   <div id="page-work" class="page">
-    <div class="scaffold wrap">
-      <p class="u-label scaffold-label">Work</p>
-      <h2 class="scaffold-title">Case Studies</h2>
+
+    <!-- Header -->
+    <header class="wp-header">
+      <nav class="wp-nav-left">
+        <a class="wp-nav-link wp-nav-active" onclick="showPage('work')">Work</a>
+        <a class="wp-nav-link wp-nav-muted" onclick="document.getElementById('img-collection-section')&&(showPage('home'),setTimeout(()=>document.getElementById('img-collection-section').scrollIntoView({behavior:'smooth'}),300))">Images</a>
+      </nav>
+      <img src="onul-studio-logo_1.svg" class="wp-header-logo" onclick="showPage('home')" alt="Onul Creative Studio" />
+      <nav class="wp-nav-right">
+        <a class="wp-nav-link wp-nav-muted" onclick="showPage('contact')">Contact</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <div class="wp-hero">
+      <h1 class="wp-hero-title">Campaigns, identities <em>&amp;</em> film</h1>
     </div>
-  </div>
+
+    <!-- Section: Video -->
+    <section class="wp-section">
+      <div class="wp-section-header">
+        <span class="wp-section-name">Video</span>
+        <span class="wp-section-count">05 works</span>
+      </div>
+      <div class="wp-grid">
+
+        <div class="wp-tile" data-idx="0">
+          <div class="wp-media-box">
+            <img class="wp-cover" src="Nuvelaad1_replacement.png" alt="Nuvela" />
+          </div>
+          <div class="wp-caption">
+            <span class="wp-caption-left"><span class="wp-tile-title">Nuvela</span> <em class="wp-tile-client">Skincare Brand Concept</em></span>
+            <span class="wp-tile-type">Creative Direction</span>
+          </div>
+        </div>
+
+        <div class="wp-tile" data-idx="1">
+          <div class="wp-media-box">
+            <img class="wp-cover" src="Cover.webp" alt="The Perfect Blend" />
+            <video class="wp-vid-preview" src="The perfect blend ad.mov" muted playsinline preload="metadata"></video>
+          </div>
+          <div class="wp-caption">
+            <span class="wp-caption-left"><span class="wp-tile-title">The Perfect Blend</span> <em class="wp-tile-client">Concept Ad</em></span>
+            <span class="wp-tile-type">Creative Direction</span>
+          </div>
+        </div>
+
+        <div class="wp-tile" data-idx="2">
+          <div class="wp-media-box">
+            <img class="wp-cover" src="Rubbrband cover.jpg" alt="Rubbrband" />
+            <video class="wp-vid-preview" src="Rubbrband spec ad.mov" muted playsinline preload="metadata"></video>
+          </div>
+          <div class="wp-caption">
+            <span class="wp-caption-left"><span class="wp-tile-title">Rubbrband</span> <em class="wp-tile-client">Spec Ad</em></span>
+            <span class="wp-tile-type">Creative Direction</span>
+          </div>
+        </div>
+
+        <div class="wp-tile" data-idx="3">
+          <div class="wp-media-box">
+            <img class="wp-cover" src="tumble card.png" alt="Vale" style="visibility:hidden" />
+            <video class="wp-vid-preview" src="Vale spec.mov" muted playsinline preload="metadata"></video>
+          </div>
+          <div class="wp-caption">
+            <span class="wp-caption-left"><span class="wp-tile-title">Vale</span> <em class="wp-tile-client">Spec Ad</em></span>
+            <span class="wp-tile-type">Creative Direction</span>
+          </div>
+        </div>
+
+        <div class="wp-tile" data-idx="4">
+          <div class="wp-media-box">
+            <img class="wp-cover" src="tumble card.png" alt="Tumble" />
+            <video class="wp-vid-preview" src="Tumble Ad.mp4" muted playsinline preload="metadata"></video>
+          </div>
+          <div class="wp-caption">
+            <span class="wp-caption-left"><span class="wp-tile-title">Tumble</span> <em class="wp-tile-client">Video Ad</em></span>
+            <span class="wp-tile-type">Full Production</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section: Campaigns -->
+    <section class="wp-section">
+      <div class="wp-section-header">
+        <span class="wp-section-name">Campaigns</span>
+        <span class="wp-section-count">02 works</span>
+      </div>
+      <div class="wp-grid">
+
+        <div class="wp-tile" data-idx="5">
+          <div class="wp-media-box">
+            <img class="wp-cover" src="GMhero.png" alt="Aftermath" />
+          </div>
+          <div class="wp-caption">
+            <span class="wp-caption-left"><span class="wp-tile-title">Aftermath</span> <em class="wp-tile-client">Gentle Monster</em></span>
+            <span class="wp-tile-type">Campaign Design</span>
+          </div>
+        </div>
+
+        <div class="wp-tile" data-idx="6">
+          <div class="wp-media-box">
+            <img class="wp-cover" src="ROE3.png" alt="ROE" />
+          </div>
+          <div class="wp-caption">
+            <span class="wp-caption-left"><span class="wp-tile-title">ROE</span> <em class="wp-tile-client">Concept Campaign</em></span>
+            <span class="wp-tile-type">Art Direction</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Full-screen viewer -->
+    <div class="wp-viewer" id="wp-viewer" aria-hidden="true">
+      <div class="wp-viewer-stage">
+        <video class="wp-viewer-vid" id="wp-viewer-vid" controls playsinline></video>
+        <img  class="wp-viewer-img" id="wp-viewer-img" src="" alt="" />
+      </div>
+      <div class="wp-viewer-top">
+        <span class="wp-viewer-counter" id="wp-viewer-counter"></span>
+        <button class="wp-viewer-close" id="wp-viewer-close">Close ✕</button>
+      </div>
+      <div class="wp-viewer-bottom">
+        <div class="wp-viewer-info">
+          <div class="wp-viewer-info-title" id="wp-viewer-info-title"></div>
+          <div class="wp-viewer-info-meta" id="wp-viewer-info-meta"></div>
+        </div>
+        <div class="wp-viewer-nav">
+          <button class="wp-viewer-btn" id="wp-viewer-prev">← Prev</button>
+          <button class="wp-viewer-btn" id="wp-viewer-next">Next →</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-work -->
 
 <!-- ━━━━ SCAFFOLD: BRAND IDENTITY ━━━━ -->
   <div id="page-brand-identity" class="page">
@@ -3019,8 +3437,7 @@
     const allPages = ['home','work','brand-identity','about','contact','gm','tumble','roe','blend','rubbrband','vale'];
 
     function showPage(name) {
-      const scrollToWork = name === 'work';
-      if (scrollToWork) name = 'home';
+      const scrollToWork = false;
       allPages.forEach(id => {
         const el = document.getElementById('page-' + id);
         if (el) el.classList.toggle('active', id === name);
@@ -3033,6 +3450,7 @@
       document.body.classList.toggle('on-home', name === 'home');
       document.body.classList.toggle('on-rubbrband', name === 'rubbrband');
       document.body.classList.toggle('on-vale', name === 'vale');
+      document.body.classList.toggle('on-work', name === 'work');
       if (name === 'tumble') {
         const tv = document.getElementById('tumble-page-vid');
         if (tv) { tv.muted = false; tv.currentTime = 0; tv.play(); }
@@ -3091,6 +3509,113 @@
 
     // Set on-home on initial load
     document.body.classList.add('on-home');
+
+    // ── Work Page: hover preview + viewer ──
+    (function () {
+      const PROJECTS = [
+        { title: 'Nuvela',           client: 'Skincare Brand Concept',       type: 'Creative Direction / Brand Identity',         cover: 'Nuvelaad1_replacement.png', video: null },
+        { title: 'The Perfect Blend',client: 'Concept Ad',                   type: 'Creative Direction / Full Production',         cover: 'Cover.webp',                video: 'The perfect blend ad.mov' },
+        { title: 'Rubbrband',        client: 'Spec Ad',                      type: 'Creative Direction / Full Production',         cover: 'Rubbrband cover.jpg',        video: 'Rubbrband spec ad.mov' },
+        { title: 'Vale',             client: 'Spec Ad',                      type: 'Creative Direction / Full Production',         cover: null,                        video: 'Vale spec.mov' },
+        { title: 'Tumble',           client: 'Video Ad',                     type: 'Full Production',                              cover: 'tumble card.png',            video: 'Tumble Ad.mp4' },
+        { title: 'Aftermath',        client: 'Gentle Monster',               type: 'Creative Direction / Campaign Design',         cover: 'GMhero.png',                video: null },
+        { title: 'ROE',              client: 'Concept Campaign',             type: 'Art Direction / Photography',                  cover: 'ROE3.png',                  video: null },
+      ];
+
+      const viewer     = document.getElementById('wp-viewer');
+      const vVid       = document.getElementById('wp-viewer-vid');
+      const vImg       = document.getElementById('wp-viewer-img');
+      const vCounter   = document.getElementById('wp-viewer-counter');
+      const vClose     = document.getElementById('wp-viewer-close');
+      const vPrev      = document.getElementById('wp-viewer-prev');
+      const vNext      = document.getElementById('wp-viewer-next');
+      const vInfoTitle = document.getElementById('wp-viewer-info-title');
+      const vInfoMeta  = document.getElementById('wp-viewer-info-meta');
+      if (!viewer) return;
+
+      let current = 0;
+
+      function openViewer(idx) {
+        current = idx;
+        loadViewer(idx);
+        viewer.classList.add('open');
+        viewer.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeViewer() {
+        viewer.classList.remove('open');
+        viewer.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        vVid.pause();
+        vVid.src = '';
+        vVid.classList.remove('active');
+        vImg.classList.remove('active');
+      }
+
+      function loadViewer(idx) {
+        const p = PROJECTS[idx];
+        vCounter.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(PROJECTS.length).padStart(2, '0');
+        vInfoTitle.innerHTML = p.title + (p.client ? ' <em>' + p.client + '</em>' : '');
+        vInfoMeta.textContent = p.type;
+
+        vVid.pause();
+        vVid.classList.remove('active');
+        vImg.classList.remove('active');
+
+        if (p.video) {
+          vVid.src = p.video;
+          vVid.poster = p.cover || '';
+          vVid.classList.add('active');
+          vVid.play().catch(() => {});
+        } else if (p.cover) {
+          vImg.src = p.cover;
+          vImg.classList.add('active');
+        }
+      }
+
+      vClose.addEventListener('click', closeViewer);
+      vPrev.addEventListener('click', () => { current = (current - 1 + PROJECTS.length) % PROJECTS.length; loadViewer(current); });
+      vNext.addEventListener('click', () => { current = (current + 1) % PROJECTS.length; loadViewer(current); });
+
+      document.addEventListener('keydown', e => {
+        if (!viewer.classList.contains('open')) return;
+        if (e.key === 'Escape')      closeViewer();
+        if (e.key === 'ArrowLeft')   { current = (current - 1 + PROJECTS.length) % PROJECTS.length; loadViewer(current); }
+        if (e.key === 'ArrowRight')  { current = (current + 1) % PROJECTS.length; loadViewer(current); }
+      });
+
+      // Tile clicks
+      document.querySelectorAll('.wp-tile').forEach(tile => {
+        tile.addEventListener('click', () => openViewer(parseInt(tile.dataset.idx)));
+      });
+
+      // Hover preview (desktop only)
+      const isTouch = window.matchMedia('(hover: none)').matches;
+      if (!isTouch) {
+        document.querySelectorAll('.wp-tile').forEach(tile => {
+          const vid = tile.querySelector('.wp-vid-preview');
+          if (!vid) return;
+          let timer = null;
+          tile.addEventListener('mouseenter', () => {
+            vid.currentTime = 0;
+            vid.play().catch(() => {});
+            vid.style.opacity = '1';
+            timer = setTimeout(() => {
+              vid.pause();
+              vid.style.opacity = '0';
+              vid.currentTime = 0;
+            }, 5000);
+          });
+          tile.addEventListener('mouseleave', () => {
+            clearTimeout(timer);
+            vid.pause();
+            vid.style.opacity = '0';
+            vid.currentTime = 0;
+          });
+        });
+      }
+    })();
 
 
     const isMobile = () => window.innerWidth <= 768 || window.matchMedia('(hover: none) and (pointer: coarse)').matches;
