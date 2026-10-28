@@ -2918,30 +2918,36 @@
         <!-- Column 1: warm → cool gradient, scrolls downward -->
         <div class="ic-col" id="ic-col-1">
           <img class="ic-img" src="elegant minimal 2.png" alt="" />
-          <img class="ic-img" src="elegant minimal.png" alt="" />
           <img class="ic-img" src="swim.png" alt="" />
+          <img class="ic-img" src="model1.png" alt="" />
+          <img class="ic-img" src="elegant minimal.png" alt="" />
           <img class="ic-img" src="dog.png" alt="" />
+          <img class="ic-img" src="model3.png" alt="" />
           <div class="ic-panorama">
             <img class="ic-img" src="ig1.png" alt="" />
             <img class="ic-img" src="ig2.png" alt="" />
             <img class="ic-img" src="ig3.png" alt="" />
           </div>
-          <img class="ic-img" src="Matcha.png" alt="" />
+          <img class="ic-img" src="model2.png" alt="" />
           <img class="ic-img" src="lineup.png" alt="" />
+          <img class="ic-img" src="model4.png" alt="" />
           <img class="ic-img" src="peacock.png" alt="" />
           <img class="ic-img" src="coral.png" alt="" />
           <!-- duplicate for seamless loop -->
           <img class="ic-img" src="elegant minimal 2.png" alt="" />
-          <img class="ic-img" src="elegant minimal.png" alt="" />
           <img class="ic-img" src="swim.png" alt="" />
+          <img class="ic-img" src="model1.png" alt="" />
+          <img class="ic-img" src="elegant minimal.png" alt="" />
           <img class="ic-img" src="dog.png" alt="" />
+          <img class="ic-img" src="model3.png" alt="" />
           <div class="ic-panorama">
             <img class="ic-img" src="ig1.png" alt="" />
             <img class="ic-img" src="ig2.png" alt="" />
             <img class="ic-img" src="ig3.png" alt="" />
           </div>
-          <img class="ic-img" src="Matcha.png" alt="" />
+          <img class="ic-img" src="model2.png" alt="" />
           <img class="ic-img" src="lineup.png" alt="" />
+          <img class="ic-img" src="model4.png" alt="" />
           <img class="ic-img" src="peacock.png" alt="" />
           <img class="ic-img" src="coral.png" alt="" />
         </div>
@@ -2949,30 +2955,36 @@
         <div class="ic-col" id="ic-col-2">
           <img class="ic-img" src="coral.png" alt="" />
           <img class="ic-img" src="peacock.png" alt="" />
+          <img class="ic-img" src="model4.png" alt="" />
           <img class="ic-img" src="lineup.png" alt="" />
-          <img class="ic-img" src="Matcha.png" alt="" />
+          <img class="ic-img" src="model2.png" alt="" />
           <div class="ic-panorama">
             <img class="ic-img" src="ig3.png" alt="" />
             <img class="ic-img" src="ig2.png" alt="" />
             <img class="ic-img" src="ig1.png" alt="" />
           </div>
+          <img class="ic-img" src="model3.png" alt="" />
           <img class="ic-img" src="dog.png" alt="" />
-          <img class="ic-img" src="swim.png" alt="" />
           <img class="ic-img" src="elegant minimal.png" alt="" />
+          <img class="ic-img" src="model1.png" alt="" />
+          <img class="ic-img" src="swim.png" alt="" />
           <img class="ic-img" src="elegant minimal 2.png" alt="" />
           <!-- duplicate -->
           <img class="ic-img" src="coral.png" alt="" />
           <img class="ic-img" src="peacock.png" alt="" />
+          <img class="ic-img" src="model4.png" alt="" />
           <img class="ic-img" src="lineup.png" alt="" />
-          <img class="ic-img" src="Matcha.png" alt="" />
+          <img class="ic-img" src="model2.png" alt="" />
           <div class="ic-panorama">
             <img class="ic-img" src="ig3.png" alt="" />
             <img class="ic-img" src="ig2.png" alt="" />
             <img class="ic-img" src="ig1.png" alt="" />
           </div>
+          <img class="ic-img" src="model3.png" alt="" />
           <img class="ic-img" src="dog.png" alt="" />
-          <img class="ic-img" src="swim.png" alt="" />
           <img class="ic-img" src="elegant minimal.png" alt="" />
+          <img class="ic-img" src="model1.png" alt="" />
+          <img class="ic-img" src="swim.png" alt="" />
           <img class="ic-img" src="elegant minimal 2.png" alt="" />
         </div>
       </div>
@@ -3633,6 +3645,7 @@
         document.querySelectorAll('.wp-tile').forEach(tile => {
           const vid = tile.querySelector('.wp-vid-preview');
           if (!vid) return;
+          const restoreOpacity = vid.style.opacity || '0';
           let timer = null;
           tile.addEventListener('mouseenter', () => {
             vid.currentTime = 0;
@@ -3640,14 +3653,14 @@
             vid.style.opacity = '1';
             timer = setTimeout(() => {
               vid.pause();
-              vid.style.opacity = '0';
+              vid.style.opacity = restoreOpacity;
               vid.currentTime = 0;
             }, 5000);
           });
           tile.addEventListener('mouseleave', () => {
             clearTimeout(timer);
             vid.pause();
-            vid.style.opacity = '0';
+            vid.style.opacity = restoreOpacity;
             vid.currentTime = 0;
           });
         });
